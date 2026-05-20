@@ -3,155 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D toys</title>
+    <title>Мир 3D Игрушек - Магазин</title>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 15px;
-            display: flex;
-            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Liquid Glass Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 20px 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            animation: fadeInUp 0.5s ease-out;
-            flex: 1;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border-radius: 30px;
+            padding: 25px 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: containerAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes containerAppear {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(20px) scale(0.95); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        @keyframes fadeOutRight {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(30px); }
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
-            50% { box-shadow: 0 5px 30px rgba(102, 126, 234, 0.7); }
-            100% { box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
+            0% { box-shadow: 0 5px 20px rgba(102,126,234,0.3); }
+            70% { box-shadow: 0 5px 35px rgba(102,126,234,0.5); }
+            100% { box-shadow: 0 5px 20px rgba(102,126,234,0.3); }
         }
 
         @keyframes bounceIn {
             0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
+            50% { transform: scale(1.08); }
             100% { transform: scale(1); opacity: 1; }
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-
-        @keyframes slideOutRight {
-            to {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        @keyframes liquidShine {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(5%, -3%) rotate(2deg); }
         }
 
         header {
             text-align: center;
             margin-bottom: 20px;
-            animation: fadeInScale 0.6s ease-out;
+            animation: fadeInScale 0.6s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
-            font-size: 2.2em;
-            color: #333;
+            font-size: 2.4em;
             margin-bottom: 5px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
-        .subtitle {
-            color: #666;
-            font-size: 1em;
-        }
+        .subtitle { color: rgba(255,255,255,0.8); font-size: 1em; }
 
         .user-nav {
             display: flex;
@@ -159,11 +123,14 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
+            padding: 15px 18px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 20px;
             flex-wrap: wrap;
-            animation: fadeInUp 0.5s ease-out 0.1s both;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.1s both;
         }
 
         .user-info {
@@ -171,22 +138,22 @@
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            padding: 6px 12px;
+            border-radius: 15px;
+            transition: all 0.4s ease;
             border: 2px solid transparent;
+            background: rgba(255,255,255,0.08);
         }
 
         .user-info:hover {
-            background: white;
-            border-color: #667eea;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
         }
 
         .user-avatar {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
@@ -195,49 +162,19 @@
             justify-content: center;
             font-weight: bold;
             font-size: 1.1em;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
         }
 
-        .user-info:hover .user-avatar {
-            transform: scale(1.1);
-        }
-
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: #333;
-            font-size: 0.95em;
-        }
-
-        .user-email {
-            font-size: 0.8em;
-            color: #666;
-        }
-
-        .profile-hint {
-            font-size: 0.7em;
-            color: #667eea;
-            transition: opacity 0.3s;
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+        .user-details { display: flex; flex-direction: column; gap: 1px; }
+        .user-name { font-weight: 600; color: #fff; font-size: 0.95em; }
+        .user-email { font-size: 0.8em; color: rgba(255,255,255,0.7); }
+        .profile-hint { font-size: 0.7em; color: rgba(255,255,255,0.6); }
+        .user-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
         .badge {
             background: #dc3545;
             color: white;
-            padding: 2px 7px;
-            border-radius: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
             font-size: 0.75em;
             font-weight: bold;
             animation: bounceIn 0.5s ease-out;
@@ -245,191 +182,143 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
             margin-bottom: 20px;
         }
 
         .product-card {
-            background: white;
-            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #eee;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            border: 1px solid rgba(255,255,255,0.15);
             animation: fadeInUp 0.5s ease-out both;
-            animation-delay: calc(var(--index, 0) * 0.05s);
+            animation-delay: calc(var(--index) * 0.06s);
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.15);
         }
 
         .product-image {
             width: 100%;
-            height: 160px;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            height: 170px;
+            background: rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
+            font-size: 3.5em;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .product-info {
-            padding: 15px;
-        }
-
-        .product-name {
-            font-size: 1.05em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .product-description {
-            color: #666;
-            font-size: 0.85em;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .product-price {
-            font-size: 1.3em;
-            color: #667eea;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+        .product-card:hover .product-image { transform: scale(1.08); }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-info { padding: 18px; }
+        .product-name { font-size: 1.1em; font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .product-description { color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 12px; line-height: 1.4; }
+        .product-price { font-size: 1.4em; color: #fff; font-weight: 700; margin-bottom: 12px; }
 
         .add-to-cart {
             width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 12px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
-            border: none;
-            border-radius: 7px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
             font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            position: relative;
-            overflow: hidden;
         }
 
         .add-to-cart:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.3);
         }
 
-        .add-to-cart:active {
-            transform: scale(0.97);
-            transition: transform 0.1s;
-        }
-
-        .added-to-cart {
-            animation: shake 0.5s ease;
-        }
-
-        /* ========== ПЛАВАЮЩАЯ КОРЗИНА ========== */
+        /* Плавающая корзина */
         .cart-float-btn {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: rgba(102,126,234,0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             color: white;
-            border: none;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            font-size: 1.5em;
+            font-size: 1.6em;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 32px rgba(102,126,234,0.4);
             z-index: 999;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: pulse 2s infinite;
+            animation: pulse 3s infinite, float 6s ease-in-out infinite;
+            transition: all 0.4s ease;
         }
 
-        .cart-float-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
-        }
-
-        .cart-float-btn:active {
-            transform: scale(0.95);
-            transition: transform 0.1s;
-        }
+        .cart-float-btn:hover { transform: scale(1.15); }
 
         .cart-float-btn .cart-count {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -8px;
+            right: -8px;
             background: #dc3545;
             color: white;
-            width: 25px;
-            height: 25px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            font-size: 0.55em;
+            font-size: 0.6em;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             border: 3px solid white;
-            transition: all 0.3s ease;
-        }
-
-        .cart-float-btn .cart-count.bump {
-            animation: bounceIn 0.5s ease-out;
+            box-shadow: 0 4px 10px rgba(220,53,69,0.4);
         }
 
         .cart-popup {
             position: fixed;
-            bottom: 100px;
-            right: 25px;
-            width: 380px;
-            max-width: 90vw;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            bottom: 110px;
+            right: 30px;
+            width: 400px;
+            max-width: 92vw;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
             z-index: 1000;
             display: none;
             max-height: 70vh;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .cart-popup.active {
-            display: block;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        .cart-popup.closing {
-            animation: slideDown 0.2s ease-in;
-        }
+        .cart-popup.active { display: block; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+        .cart-popup.closing { animation: slideDown 0.25s ease-in; }
 
         .cart-popup-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            border-bottom: 2px solid #f0f0f0;
-            background: #f8f9fa;
-            border-radius: 15px 15px 0 0;
+            padding: 18px 22px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            background: rgba(248,249,250,0.8);
+            border-radius: 28px 28px 0 0;
         }
 
         .cart-popup-close {
@@ -438,84 +327,33 @@
             font-size: 1.2em;
             cursor: pointer;
             color: #666;
-            padding: 5px;
-            transition: all 0.3s ease;
+            padding: 6px;
             border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .cart-popup-close:hover {
-            color: #dc3545;
-            background: #f0f0f0;
-            transform: rotate(90deg);
-        }
-
-        .cart-popup-body {
-            padding: 15px 20px;
-            overflow-y: auto;
-            max-height: 45vh;
-        }
-
-        .cart-popup-body::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .cart-popup-body::-webkit-scrollbar-thumb {
-            background: #ddd;
-            border-radius: 3px;
-        }
-
-        .cart-popup-footer {
-            padding: 15px 20px;
-            border-top: 2px solid #f0f0f0;
-            background: #f8f9fa;
-            border-radius: 0 0 15px 15px;
-        }
+        .cart-popup-close:hover { color: #dc3545; background: rgba(220,53,69,0.1); transform: rotate(90deg); }
+        .cart-popup-body { padding: 15px 22px; overflow-y: auto; max-height: 45vh; }
+        .cart-popup-footer { padding: 18px 22px; border-top: 1px solid rgba(0,0,0,0.1); background: rgba(248,249,250,0.8); border-radius: 0 0 28px 28px; }
 
         .cart-popup-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             font-size: 0.85em;
             animation: slideInLeft 0.3s ease-out both;
-            animation-delay: calc(var(--index, 0) * 0.05s);
         }
 
-        .cart-popup-item.removing {
-            animation: slideOutRight 0.3s ease-in forwards;
-        }
-
-        .cart-popup-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-popup-total {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #333;
-            text-align: right;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .cart-popup-empty {
-            text-align: center;
-            color: #999;
-            padding: 20px;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .guest-cart-notice {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 0.8em;
-            color: #856404;
-            animation: fadeIn 0.3s ease-out;
-        }
+        .cart-popup-item.removing { animation: fadeOutRight 0.3s ease-in forwards; }
+        .cart-popup-total { font-size: 1.15em; font-weight: 700; color: #333; text-align: right; margin-bottom: 14px; }
+        .cart-popup-empty { text-align: center; color: #999; padding: 25px; }
 
         .cart-overlay {
             position: fixed;
@@ -523,19 +361,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             z-index: 998;
             display: none;
-            transition: opacity 0.3s ease;
         }
 
-        .cart-overlay.active {
-            display: block;
-            animation: fadeIn 0.3s ease-out;
-        }
+        .cart-overlay.active { display: block; animation: fadeIn 0.3s ease-out; }
+        .cart-overlay.closing { animation: fadeOut 0.3s ease-in; }
 
-        .cart-overlay.closing {
-            animation: fadeOut 0.2s ease-in;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Модальные окна */
@@ -546,312 +384,159 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1100;
             justify-content: center;
             align-items: center;
             padding: 15px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .modal.active {
-            display: flex !important;
-            opacity: 1;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .modal.closing {
-            opacity: 0;
-            animation: fadeOut 0.3s ease-in;
-        }
+        .modal.active { display: flex !important; animation: fadeIn 0.3s ease-out; }
+        .modal.closing { animation: fadeOut 0.3s ease-in; }
 
         .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            padding: 28px;
+            border-radius: 24px;
             width: 90%;
-            max-width: 500px;
+            max-width: 520px;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            animation: fadeInScale 0.3s ease-out;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: fadeInScale 0.35s cubic-bezier(0.16,1,0.3,1);
         }
 
-        .modal-large {
-            max-width: 700px;
-        }
+        .modal-content.closing { animation: fadeOut 0.25s ease-in; }
 
-        .admin-panel {
-            display: none;
-            animation: fadeInUp 0.5s ease-out;
-        }
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; animation: containerAppear 0.5s cubic-bezier(0.16,1,0.3,1); }
 
-        .admin-panel.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-            animation: fadeInUp 0.3s ease-out both;
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.05s; }
-        .form-group:nth-child(2) { animation-delay: 0.1s; }
-        .form-group:nth-child(3) { animation-delay: 0.15s; }
-        .form-group:nth-child(4) { animation-delay: 0.2s; }
-        .form-group:nth-child(5) { animation-delay: 0.25s; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            color: #333;
-            font-weight: 500;
-            font-size: 0.9em;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: 500; font-size: 0.9em; }
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 9px;
-            border: 2px solid #e0e0e0;
-            border-radius: 7px;
+            padding: 10px 14px;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
             font-size: 0.9em;
             font-family: inherit;
+            background: rgba(255,255,255,0.8);
             transition: all 0.3s ease;
         }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
         }
-
-        .form-group textarea {
-            height: 70px;
-            resize: vertical;
-        }
-
-        .input-group {
-            display: flex;
-        }
-
+        .form-group textarea { height: 75px; resize: vertical; }
+        .input-group { display: flex; }
         .input-group-addon {
-            background: #f0f0f0;
-            padding: 9px 12px;
-            border: 2px solid #e0e0e0;
+            background: rgba(240,240,240,0.8);
+            padding: 10px 14px;
+            border: 2px solid rgba(0,0,0,0.1);
             border-right: none;
-            border-radius: 7px 0 0 7px;
+            border-radius: 12px 0 0 12px;
             color: #666;
             font-size: 0.85em;
         }
-
-        .input-group input {
-            border-radius: 0 7px 7px 0;
-            flex: 1;
-        }
+        .input-group input { border-radius: 0 12px 12px 0; flex: 1; }
 
         .btn {
-            padding: 8px 16px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 7px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 0.9em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
             font-weight: 500;
             white-space: nowrap;
-            position: relative;
-            overflow: hidden;
         }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:active::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-            transition: transform 0.1s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-success {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-warning {
-            background: #ffc107;
-            color: #333;
-        }
-
-        .btn-info {
-            background: #17a2b8;
-            color: white;
-        }
-
-        .btn-sm {
-            padding: 5px 10px;
-            font-size: 0.8em;
-        }
-
-        .btn-block {
-            width: 100%;
-            justify-content: center;
-        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-secondary { background: rgba(108,117,125,0.8); color: white; }
+        .btn-success { background: linear-gradient(135deg, #28a745, #20c997); color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .btn-sm { padding: 6px 12px; font-size: 0.8em; }
+        .btn-block { width: 100%; justify-content: center; }
 
         .admin-section {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 10px;
+            background: rgba(248,249,250,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 18px;
             margin-bottom: 18px;
-            border: 1px solid #e0e0e0;
-            animation: fadeInUp 0.4s ease-out;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .admin-product-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
+            padding: 12px 15px;
             background: white;
-            margin-bottom: 8px;
-            border-radius: 8px;
+            margin-bottom: 10px;
+            border-radius: 14px;
             flex-wrap: wrap;
             gap: 10px;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
             animation: slideInLeft 0.3s ease-out both;
         }
 
-        .admin-product-item:hover {
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transform: translateX(3px);
-        }
-
-        .admin-product-item.removing {
-            animation: slideOutRight 0.3s ease-in forwards;
-        }
-
-        .admin-product-item img {
-            width: 45px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
+        .admin-product-item.removing { animation: fadeOutRight 0.3s ease-in forwards; }
+        .admin-product-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 10px; }
 
         .tabs {
             display: flex;
             gap: 5px;
-            margin-bottom: 18px;
-            background: #f8f9fa;
-            padding: 4px;
-            border-radius: 8px;
+            margin-bottom: 20px;
+            background: rgba(248,249,250,0.7);
+            padding: 5px;
+            border-radius: 14px;
             flex-wrap: wrap;
         }
-
         .tab-btn {
-            padding: 8px 18px;
+            padding: 10px 20px;
             background: transparent;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 0.9em;
             transition: all 0.3s ease;
             font-weight: 500;
             color: #666;
         }
-
-        .tab-btn:hover {
-            background: rgba(255,255,255,0.5);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
-            animation: fadeInScale 0.3s ease-out;
-        }
-
-        .tab-content {
-            animation: fadeInUp 0.4s ease-out;
-        }
+        .tab-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
 
         .order-card {
             background: white;
-            border-radius: 10px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 20px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
             animation: fadeInUp 0.4s ease-out both;
         }
 
-        .order-card:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid rgba(0,0,0,0.05); flex-wrap: wrap; gap: 10px; }
 
         .order-status {
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 0.8em;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
             border: 2px solid;
-            transition: all 0.3s ease;
         }
 
         .status-new { background: #fff3cd; color: #856404; border-color: #ffc107; }
@@ -860,146 +545,82 @@
         .status-cancelled { background: #f8d7da; color: #721c24; border-color: #dc3545; }
 
         .order-items { margin-bottom: 12px; }
-        .order-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9em; }
-        .order-total { text-align: right; font-size: 1.15em; font-weight: 700; color: #333; margin: 10px 0; }
-        .order-timeline { margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 7px; font-size: 0.85em; }
-        .timeline-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; animation: slideInLeft 0.3s ease-out both; }
-        .cancellation-reason { background: #fff5f5; border-left: 3px solid #dc3545; padding: 10px; margin-top: 10px; border-radius: 6px; font-size: 0.9em; animation: fadeIn 0.3s ease-out; }
-        .contact-info { background: #f0f9ff; border-left: 3px solid #0088cc; padding: 10px; margin-top: 10px; border-radius: 6px; }
-        .telegram-link { color: #0088cc; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; background: #e3f2fd; border-radius: 15px; font-size: 0.85em; transition: all 0.3s ease; }
-        .telegram-link:hover { background: #bbdefb; transform: translateY(-1px); }
+        .order-item { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.03); font-size: 0.9em; }
+        .order-total { text-align: right; font-size: 1.2em; font-weight: 700; color: #333; margin: 12px 0; }
+        .order-timeline { margin-top: 14px; padding: 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.85em; }
+        .cancellation-reason { background: #fff5f5; border-left: 4px solid #dc3545; padding: 12px; margin-top: 12px; border-radius: 10px; font-size: 0.9em; }
+        .contact-info { background: #f0f9ff; border-left: 4px solid #0088cc; padding: 12px; margin-top: 12px; border-radius: 10px; }
+        .telegram-link { color: #0088cc; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; background: #e3f2fd; border-radius: 20px; font-size: 0.85em; }
 
-        .profile-header { text-align: center; margin-bottom: 20px; }
-        .profile-avatar-large { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2em; margin: 0 auto 12px; transition: transform 0.3s ease; }
-        .profile-avatar-large:hover { transform: scale(1.1) rotate(5deg); }
-        .profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 18px; }
-        .profile-info-card { background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; transition: all 0.3s ease; }
-        .profile-info-card:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
-        .profile-info-label { font-size: 0.8em; color: #666; margin-bottom: 3px; }
+        .profile-header { text-align: center; margin-bottom: 22px; }
+        .profile-avatar-large { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2.2em; margin: 0 auto 15px; }
+        .profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .profile-info-card { background: #f8f9fa; padding: 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
+        .profile-info-label { font-size: 0.8em; color: #666; margin-bottom: 4px; }
         .profile-info-value { font-weight: 600; color: #333; font-size: 0.95em; }
 
         .notification {
             position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 12px 20px;
-            background: #28a745;
+            top: 20px;
+            right: 20px;
+            padding: 14px 22px;
+            background: rgba(40,167,69,0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             color: white;
-            border-radius: 8px;
+            border-radius: 14px;
             z-index: 2000;
-            animation: slideInRight 0.3s ease-out;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            animation: slideInRight 0.4s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             font-weight: 500;
             font-size: 0.9em;
-            transition: all 0.3s ease;
         }
 
-        .notification.hiding {
-            animation: fadeOut 0.3s ease-in forwards;
-        }
+        .notification.hiding { animation: fadeOutRight 0.3s ease-in forwards; }
 
         .status-list { margin-top: 15px; }
-        .status-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: white; margin-bottom: 6px; border-radius: 7px; border: 1px solid #e0e0e0; transition: all 0.3s ease; animation: slideInLeft 0.3s ease-out both; }
-        .status-item:hover { transform: translateX(3px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
-        .status-color-box { display: inline-block; width: 22px; height: 22px; border-radius: 4px; margin-right: 8px; vertical-align: middle; border: 2px solid rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-        .status-item:hover .status-color-box { transform: scale(1.2); }
-        .image-preview { width: 120px; height: 120px; border: 2px dashed #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 8px; overflow: hidden; transition: all 0.3s ease; }
-        .image-preview:hover { border-color: #667eea; }
-        .image-preview img { width: 100%; height: 100%; object-fit: cover; animation: fadeInScale 0.3s ease-out; }
+        .status-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: white; margin-bottom: 8px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
+        .status-color-box { display: inline-block; width: 24px; height: 24px; border-radius: 8px; margin-right: 10px; vertical-align: middle; }
 
-        /* ========== ФУТЕР ========== */
-        .footer {
-            text-align: center;
-            padding: 20px 25px;
-            margin-top: 20px;
-            animation: fadeInUp 0.5s ease-out 0.3s both;
-        }
+        .image-preview { width: 130px; height: 130px; border: 2px dashed #ddd; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-top: 10px; overflow: hidden; }
+        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-        .footer-content {
-            background: white;
-            border-radius: 12px;
-            padding: 18px 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            max-width: 1100px;
-            margin: 0 auto;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-        }
+        .footer { text-align: center; padding: 20px 25px; margin-top: 20px; }
+        .footer-content { background: rgba(255,255,255,0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-radius: 18px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); max-width: 1100px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.15); }
+        .footer-logo { font-size: 1.2em; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+        .footer-copyright { color: rgba(255,255,255,0.7); font-size: 0.85em; margin-bottom: 8px; }
+        .footer-support { color: #fff; font-size: 0.85em; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; padding: 7px 15px; background: rgba(255,255,255,0.15); border-radius: 20px; text-decoration: none; transition: all 0.3s ease; }
+        .footer-support:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
 
-        .footer-logo {
-            font-size: 1.2em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
+        .guest-cart-notice { background: rgba(255,243,205,0.8); border: 1px solid rgba(255,193,7,0.5); padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; font-size: 0.8em; color: #856404; }
 
-        .footer-copyright {
-            color: #666;
-            font-size: 0.85em;
-            margin-bottom: 6px;
-        }
-
-        .footer-rights {
-            color: #999;
-            font-size: 0.75em;
-            margin-bottom: 8px;
-        }
-
-        .footer-support {
-            color: #0088cc;
-            font-size: 0.85em;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: #f0f9ff;
-            border-radius: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-support:hover {
-            background: #e3f2fd;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 136, 204, 0.2);
-        }
-
-        .footer-divider {
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            margin: 8px auto;
-            border-radius: 1px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 6px; }
 
         @media (max-width: 768px) {
             body { padding: 8px; }
-            .container { padding: 15px; }
+            .container { padding: 18px; }
             .products-grid { grid-template-columns: 1fr; }
-            .user-nav { flex-direction: column; }
-            .modal-content { padding: 18px; }
-            .cart-popup { width: 95vw; right: 2.5vw; bottom: 90px; }
-            .footer-content { padding: 15px; }
+            .cart-popup { width: 95vw; right: 2.5vw; bottom: 100px; }
         }
     </style>
 </head>
 <body>
     <div id="shopContainer" class="container">
         <header>
-            <h1>🎮3D Toys</h1>
-            <p class="subtitle">Уникальные 3D игрушки для детей и взрослых</p>
+            <h1>🎮 Мир 3D Игрушек</h1>
+            <p class="subtitle">Уникальные 3D-печатные игрушки для детей и взрослых</p>
         </header>
 
         <div class="user-nav" id="userNav">
             <div id="userNotLoggedIn" style="display: flex; gap: 8px; align-items: center;">
-                <span style="color: #666; font-size: 0.85em;">👋 Гость</span>
+                <span style="color: rgba(255,255,255,0.7); font-size: 0.85em;">👋 Гость</span>
                 <button class="btn btn-primary" onclick="showRegisterModal()">📝 Регистрация</button>
                 <button class="btn btn-info" onclick="showLoginUserModal()">🔑 Войти</button>
             </div>
             <div id="userLoggedIn" style="display: none; width: 100%; justify-content: space-between; align-items: center;">
-                <div class="user-info" onclick="showProfileModal()" title="Нажмите для просмотра профиля">
+                <div class="user-info" onclick="showProfileModal()">
                     <div class="user-avatar" id="userAvatar"></div>
                     <div class="user-details">
                         <span class="user-name" id="userDisplayName"></span>
@@ -1008,9 +629,7 @@
                     </div>
                 </div>
                 <div class="user-actions">
-                    <button class="btn btn-info" onclick="event.stopPropagation(); showMyOrders()">
-                        📦 Мои заказы <span class="badge" id="ordersBadge" style="display: none;">0</span>
-                    </button>
+                    <button class="btn btn-info" onclick="event.stopPropagation(); showMyOrders()">📦 Мои заказы <span class="badge" id="ordersBadge" style="display: none;">0</span></button>
                     <button class="btn btn-secondary" onclick="event.stopPropagation(); logoutUser()">🚪 Выйти</button>
                 </div>
             </div>
@@ -1023,52 +642,75 @@
         </div>
     </div>
 
-    <!-- Футер -->
     <div class="footer" id="mainFooter">
         <div class="footer-content">
             <div class="footer-logo">3D Toys<span style="font-size: 0.7em; vertical-align: super;">®</span></div>
-            <div class="footer-copyright">© 2026 Мир 3D Игрушек. Все права защищены.</div>
-            <div class="footer-rights">3D Toys® является зарегистрированной торговой маркой.</div>
-            <div class="footer-divider"></div>
-            <a href="https://t.me/Ars3n1xz" target="_blank" class="footer-support">
-                📱 Поддержка: @Ars3n1xz
-            </a>
+            <div class="footer-copyright">© 2024 Мир 3D Игрушек. Все права защищены.</div>
+            <a href="https://t.me/Ars3n1xz" target="_blank" class="footer-support">📱 Поддержка: @Ars3n1xz</a>
         </div>
     </div>
 
-    <!-- Плавающая кнопка корзины -->
-    <button class="cart-float-btn" id="cartFloatBtn" onclick="toggleCartPopup()">
-        🛒
-        <span class="cart-count" id="cartFloatCount" style="display: none;">0</span>
-    </button>
-
-    <!-- Оверлей -->
+    <button class="cart-float-btn" id="cartFloatBtn" onclick="toggleCartPopup()">🛒<span class="cart-count" id="cartFloatCount" style="display: none;">0</span></button>
     <div class="cart-overlay" id="cartOverlay" onclick="closeCartPopup()"></div>
-
-    <!-- Всплывающее окно корзины -->
     <div class="cart-popup" id="cartPopup">
-        <div class="cart-popup-header">
-            <h3>🛒 Корзина</h3>
-            <button class="cart-popup-close" onclick="closeCartPopup()">✕</button>
-        </div>
-        <div class="cart-popup-body" id="cartPopupBody">
-            <p class="cart-popup-empty">Корзина пуста</p>
-        </div>
+        <div class="cart-popup-header"><h3>🛒 Корзина</h3><button class="cart-popup-close" onclick="closeCartPopup()">✕</button></div>
+        <div class="cart-popup-body" id="cartPopupBody"><p class="cart-popup-empty">Корзина пуста</p></div>
         <div class="cart-popup-footer">
-            <div id="cartGuestNotice" class="guest-cart-notice" style="display: none;">
-                💡 Войдите в систему для оформления заказа
-            </div>
+            <div id="cartGuestNotice" class="guest-cart-notice" style="display: none;">💡 Войдите в систему для оформления заказа</div>
             <div class="cart-popup-total" id="cartPopupTotal">Итого: 0 ₽</div>
-            <button class="btn btn-success btn-block" id="cartBuyBtn" onclick="handleBuyClick()" disabled>
-                💳 Оформить заказ
-            </button>
+            <button class="btn btn-success btn-block" id="cartBuyBtn" onclick="handleBuyClick()" disabled>💳 Оформить заказ</button>
         </div>
     </div>
 
     <!-- Модальные окна -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom:15px;">📝 Регистрация</h3>
+            <form onsubmit="return false;">
+                <div class="form-group"><label>Имя</label><input type="text" id="regName" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="regPassword" required minlength="4"></div>
+                <div class="form-group"><label>Телефон</label><input type="tel" id="regPhone" required></div>
+                <div class="form-group"><label>Telegram username</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" id="regTelegram" placeholder="username"></div></div>
+                <div style="display:flex;gap:8px;margin-top:15px;">
+                    <button class="btn btn-primary" style="flex:1;" onclick="registerUser()">Зарегистрироваться</button>
+                    <button class="btn btn-secondary" onclick="closeModal('registerModal')">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginUserModal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom:15px;">🔑 Вход</h3>
+            <form onsubmit="return false;">
+                <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="loginPassword" required></div>
+                <div style="display:flex;gap:8px;margin-top:15px;">
+                    <button class="btn btn-primary" style="flex:1;" onclick="loginUser()">Войти</button>
+                    <button class="btn btn-secondary" onclick="closeModal('loginUserModal')">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom:15px;">👑 Вход в админ-панель</h3>
+            <form onsubmit="return false;">
+                <div class="form-group"><label>Логин</label><input type="text" id="adminUsername" required></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="adminPassword" required></div>
+                <div style="display:flex;gap:8px;margin-top:15px;">
+                    <button class="btn btn-primary" style="flex:1;" onclick="loginAdmin()">Войти</button>
+                    <button class="btn btn-secondary" onclick="closeModal('adminLoginModal')">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div id="profileModal" class="modal">
-        <div class="modal-content modal-large">
-            <div class="profile-header"><div class="profile-avatar-large" id="profileAvatarLarge"></div><h3 id="profileName"></h3><p style="color:#666;font-size:0.9em;" id="profileEmail"></p></div>
+        <div class="modal-content" style="max-width:600px;">
+            <div class="profile-header"><div class="profile-avatar-large" id="profileAvatarLarge"></div><h3 id="profileName"></h3><p style="color:#666;" id="profileEmail"></p></div>
             <div class="profile-info-grid">
                 <div class="profile-info-card"><div class="profile-info-label">👤 Имя</div><div class="profile-info-value" id="profileInfoName"></div></div>
                 <div class="profile-info-card"><div class="profile-info-label">📧 Email</div><div class="profile-info-value" id="profileInfoEmail"></div></div>
@@ -1076,33 +718,45 @@
                 <div class="profile-info-card"><div class="profile-info-label">📱 Telegram</div><div class="profile-info-value" id="profileInfoTelegram"></div></div>
                 <div class="profile-info-card"><div class="profile-info-label">📅 Регистрация</div><div class="profile-info-value" id="profileInfoRegDate"></div></div>
             </div>
-            <div class="admin-section"><h4 style="margin-bottom:12px;">✏️ Редактировать профиль</h4><form id="profileEditForm"><div class="form-group"><label>Имя</label><input type="text" id="editName" required></div><div class="form-group"><label>Email</label><input type="email" id="editEmail" required></div><div class="form-group"><label>Телефон</label><input type="tel" id="editPhone" required></div><div class="form-group"><label>Telegram username</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" id="editTelegram" placeholder="username"></div></div><div class="form-group"><label>Новый пароль</label><input type="password" id="editPassword" placeholder="Оставьте пустым" minlength="4"></div><button type="submit" class="btn btn-primary btn-block">💾 Сохранить изменения</button></form></div>
-            <div style="text-align:center;margin-top:15px;"><button class="btn btn-secondary" onclick="closeProfileModal()">Закрыть</button></div>
+            <div class="admin-section"><h4>✏️ Редактировать профиль</h4><form onsubmit="return false;"><div class="form-group"><label>Имя</label><input type="text" id="editName" required></div><div class="form-group"><label>Email</label><input type="email" id="editEmail" required></div><div class="form-group"><label>Телефон</label><input type="tel" id="editPhone" required></div><div class="form-group"><label>Telegram username</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" id="editTelegram" placeholder="username"></div></div><div class="form-group"><label>Новый пароль</label><input type="password" id="editPassword" placeholder="Оставьте пустым" minlength="4"></div><button class="btn btn-primary btn-block" onclick="saveProfile()">💾 Сохранить изменения</button></form></div>
+            <div style="text-align:center;margin-top:15px;"><button class="btn btn-secondary" onclick="closeModal('profileModal')">Закрыть</button></div>
         </div>
     </div>
 
-    <div id="registerModal" class="modal">
-        <div class="modal-content"><h3 style="margin-bottom:15px;">📝 Регистрация</h3><form id="registerForm"><div class="form-group"><label>Имя</label><input type="text" id="regName" required></div><div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div><div class="form-group"><label>Пароль</label><input type="password" id="regPassword" required minlength="4"></div><div class="form-group"><label>Телефон</label><input type="tel" id="regPhone" required></div><div class="form-group"><label>Telegram username</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" id="regTelegram" placeholder="username"></div></div><div style="display:flex;gap:8px;margin-top:15px;"><button type="submit" class="btn btn-primary" style="flex:1;">Зарегистрироваться</button><button type="button" class="btn btn-secondary" onclick="closeRegisterModal()">Отмена</button></div></form></div>
-    </div>
-
-    <div id="loginUserModal" class="modal">
-        <div class="modal-content"><h3 style="margin-bottom:15px;">🔑 Вход</h3><form id="loginUserForm"><div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div><div class="form-group"><label>Пароль</label><input type="password" id="loginPassword" required></div><div style="display:flex;gap:8px;margin-top:15px;"><button type="submit" class="btn btn-primary" style="flex:1;">Войти</button><button type="button" class="btn btn-secondary" onclick="closeLoginUserModal()">Отмена</button></div></form></div>
-    </div>
-
-    <div id="adminLoginModal" class="modal">
-        <div class="modal-content"><h3 style="margin-bottom:15px;">👑 Вход в админ-панель</h3><form id="adminLoginForm"><div class="form-group"><label>Имя пользователя</label><input type="text" id="adminUsername" required></div><div class="form-group"><label>Пароль</label><input type="password" id="adminPassword" required></div><div style="display:flex;gap:8px;margin-top:15px;"><button type="submit" class="btn btn-primary" style="flex:1;">Войти</button><button type="button" class="btn btn-secondary" onclick="closeAdminLoginModal()">Отмена</button></div></form></div>
-    </div>
-
     <div id="orderModal" class="modal">
-        <div class="modal-content"><h3 style="margin-bottom:15px;">📝 Подтверждение заказа</h3><div id="orderUserInfo"></div><div id="orderItemsList"></div><div style="text-align:right;font-size:1.2em;font-weight:bold;margin:15px 0;" id="orderTotal"></div><div id="orderTelegramContact"></div><div style="display:flex;gap:8px;margin-top:15px;"><button class="btn btn-success" onclick="confirmOrder()" style="flex:1;">✅ Подтвердить заказ</button><button class="btn btn-secondary" onclick="closeOrderModal()">Отмена</button></div></div>
+        <div class="modal-content">
+            <h3 style="margin-bottom:15px;">📝 Подтверждение заказа</h3>
+            <div id="orderUserInfo"></div>
+            <div id="orderItemsList"></div>
+            <div style="text-align:right;font-size:1.2em;font-weight:bold;margin:15px 0;" id="orderTotal"></div>
+            <div id="orderTelegramContact"></div>
+            <div style="display:flex;gap:8px;margin-top:15px;">
+                <button class="btn btn-success" style="flex:1;" onclick="confirmOrder()">✅ Подтвердить заказ</button>
+                <button class="btn btn-secondary" onclick="closeModal('orderModal')">Отмена</button>
+            </div>
+        </div>
     </div>
 
     <div id="myOrdersModal" class="modal">
-        <div class="modal-content modal-large"><h3 style="margin-bottom:15px;">📦 Мои заказы</h3><div id="myOrdersList"></div><div style="text-align:center;margin-top:15px;"><button class="btn btn-secondary" onclick="closeMyOrdersModal()">Закрыть</button></div></div>
+        <div class="modal-content" style="max-width:700px;">
+            <h3 style="margin-bottom:15px;">📦 Мои заказы</h3>
+            <div id="myOrdersList"></div>
+            <div style="text-align:center;margin-top:15px;"><button class="btn btn-secondary" onclick="closeModal('myOrdersModal')">Закрыть</button></div>
+        </div>
     </div>
 
     <div id="cancelOrderModal" class="modal">
-        <div class="modal-content"><h3 style="margin-bottom:15px;">❌ Отмена заказа</h3><form id="cancelOrderForm"><input type="hidden" id="cancelOrderId"><div class="form-group"><label>Причина отмены</label><textarea id="cancelReason" required placeholder="Опишите причину отмены" rows="3"></textarea></div><div style="display:flex;gap:8px;margin-top:15px;"><button type="submit" class="btn btn-danger" style="flex:1;">❌ Отменить заказ</button><button type="button" class="btn btn-secondary" onclick="closeCancelOrderModal()">Отмена</button></div></form></div>
+        <div class="modal-content">
+            <h3 style="margin-bottom:15px;">❌ Отмена заказа</h3>
+            <form onsubmit="return false;">
+                <input type="hidden" id="cancelOrderId">
+                <div class="form-group"><label>Причина отмены</label><textarea id="cancelReason" required placeholder="Опишите причину отмены" rows="3"></textarea></div>
+                <div style="display:flex;gap:8px;margin-top:15px;">
+                    <button class="btn btn-danger" style="flex:1;" onclick="cancelOrder()">❌ Отменить заказ</button>
+                    <button class="btn btn-secondary" onclick="closeModal('cancelOrderModal')">Отмена</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Админ панель -->
@@ -1116,188 +770,366 @@
                 <button class="tab-btn" onclick="showTab('statuses')">🏷️ Статусы</button>
             </div>
             <div id="tab-products" class="tab-content">
-                <div class="admin-section"><h4 id="formTitle">Добавить новый товар</h4><form id="productForm" style="margin-top:12px;"><input type="hidden" id="productId"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div class="form-group"><label>Название</label><input type="text" id="productName" required></div><div class="form-group"><label>Цена (₽)</label><input type="number" id="productPrice" required min="0" step="0.01"></div></div><div class="form-group"><label>Описание</label><textarea id="productDescription" required></textarea></div><div class="form-group"><label>Изображение</label><input type="file" id="productImageFile" accept="image/*" onchange="previewImage(this)" style="padding:6px;"><div class="image-preview" id="imagePreview"><span style="color:#999;">Превью</span></div><input type="hidden" id="productImageData"></div><div style="display:flex;gap:8px;"><button type="submit" class="btn btn-primary">💾 Сохранить</button><button type="button" class="btn btn-secondary" onclick="resetProductForm()">🧹 Очистить</button></div></form></div>
+                <div class="admin-section"><h4 id="formTitle">Добавить новый товар</h4><form onsubmit="return false;"><input type="hidden" id="productId"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div class="form-group"><label>Название</label><input type="text" id="productName" required></div><div class="form-group"><label>Цена (₽)</label><input type="number" id="productPrice" required min="0" step="0.01"></div></div><div class="form-group"><label>Описание</label><textarea id="productDescription" required></textarea></div><div class="form-group"><label>Изображение</label><input type="file" id="productImageFile" accept="image/*" onchange="previewImage(this)" style="padding:6px;"><div class="image-preview" id="imagePreview"><span style="color:#999;">Превью</span></div><input type="hidden" id="productImageData"></div><div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="saveProduct()">💾 Сохранить</button><button class="btn btn-secondary" onclick="resetProductForm()">🧹 Очистить</button></div></form></div>
                 <div class="admin-section"><h4>Список товаров</h4><div class="product-list" id="adminProductList" style="margin-top:10px;"></div></div>
             </div>
-            <div id="tab-orders" class="tab-content" style="display:none;"><h3 style="margin-bottom:15px;">📦 Все заказы</h3><div id="adminOrdersList"><p style="color:#999;text-align:center;padding:30px;">Заказов пока нет</p></div></div>
-            <div id="tab-users" class="tab-content" style="display:none;"><h3 style="margin-bottom:15px;">👥 Пользователи</h3><div id="usersList"></div></div>
-            <div id="tab-statuses" class="tab-content" style="display:none;">
-                <div class="admin-section"><h4>🏷️ Управление статусами</h4><p style="color:#666;font-size:0.9em;margin-bottom:12px;">Создавайте собственные статусы</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;"><div class="form-group"><label>Название</label><input type="text" id="newStatusName" placeholder="Статус"></div><div class="form-group"><label>Цвет рамки</label><select id="newStatusColor"><option value="#ffc107">🟡 Желтый</option><option value="#2196F3">🔵 Синий</option><option value="#28a745">🟢 Зеленый</option><option value="#dc3545">🔴 Красный</option><option value="#9c27b0">🟣 Фиолетовый</option><option value="#ff9800">🟠 Оранжевый</option><option value="#607d8b">⚫ Серый</option><option value="#e91e63">💗 Розовый</option><option value="#00bcd4">🔷 Бирюзовый</option><option value="#795548">🟤 Коричневый</option></select></div></div><button class="btn btn-primary" onclick="addCustomStatus()">➕ Добавить</button><div class="status-list" id="customStatusList" style="margin-top:15px;"></div></div>
-            </div>
+            <div id="tab-orders" class="tab-content" style="display:none;"><h3>📦 Все заказы</h3><div id="adminOrdersList"><p style="color:#999;text-align:center;padding:30px;">Заказов пока нет</p></div></div>
+            <div id="tab-users" class="tab-content" style="display:none;"><h3>👥 Пользователи</h3><div id="usersList"></div></div>
+            <div id="tab-statuses" class="tab-content" style="display:none;"><div class="admin-section"><h4>🏷️ Управление статусами</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;"><div class="form-group"><label>Название</label><input type="text" id="newStatusName" placeholder="Статус"></div><div class="form-group"><label>Цвет</label><select id="newStatusColor"><option value="#ffc107">🟡 Желтый</option><option value="#2196F3">🔵 Синий</option><option value="#28a745">🟢 Зеленый</option><option value="#dc3545">🔴 Красный</option><option value="#9c27b0">🟣 Фиолетовый</option><option value="#ff9800">🟠 Оранжевый</option></select></div></div><button class="btn btn-primary" onclick="addCustomStatus()">➕ Добавить</button><div class="status-list" id="customStatusList" style="margin-top:15px;"></div></div></div>
         </div>
     </div>
 
     <script>
-        let products = JSON.parse(localStorage.getItem('products')) || [];
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        let orders = JSON.parse(localStorage.getItem('orders')) || [];
-        let customStatuses = JSON.parse(localStorage.getItem('customStatuses')) || [];
-        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-        let guestCart = JSON.parse(localStorage.getItem('guestCart')) || [];
+        // ========== НАСТРОЙКА СЕРВЕРА ==========
+        const SERVER_URL = window.location.origin + '/api.php';
+        let useServer = true;
+
+        // ========== ДАННЫЕ ==========
+        let products = [];
+        let users = [];
+        let orders = [];
+        let customStatuses = [];
+        let currentUser = null;
+        let guestCart = [];
         let isAdmin = false;
 
-        if (products.length === 0) {
-            products = [
-                { id: 1, name: '3D Динозавр', description: 'Реалистичная фигурка тираннозавра. Высота 15 см.', price: 1290, image: '🦕', imageData: '' },
-                { id: 2, name: 'Кубик Рубика', description: 'Функциональный кубик Рубика с 3D печати.', price: 890, image: '🎲', imageData: '' },
-                { id: 3, name: 'Робот-трансформер', description: 'Трансформирующийся робот с подвижными деталями.', price: 1590, image: '🤖', imageData: '' },
-                { id: 4, name: 'Сказочный дракон', description: 'Детализированная фигурка дракона.', price: 1990, image: '🐉', imageData: '' }
-            ];
-            saveProducts();
+        const demoTovary = [
+            { id: 1, name: '3D Динозавр', description: 'Реалистичная фигурка тираннозавра. Высота 15 см.', price: 1290, image: '🦕', imageData: '' },
+            { id: 2, name: 'Кубик Рубика', description: 'Функциональный кубик Рубика с 3D печати.', price: 890, image: '🎲', imageData: '' },
+            { id: 3, name: 'Робот-трансформер', description: 'Трансформирующийся робот с подвижными деталями.', price: 1590, image: '🤖', imageData: '' },
+            { id: 4, name: 'Сказочный дракон', description: 'Детализированная фигурка дракона.', price: 1990, image: '🐉', imageData: '' }
+        ];
+
+        async function loadData() {
+            if (useServer) {
+                try {
+                    const response = await fetch(SERVER_URL + '?action=getAll');
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.products) {
+                            products = data.products.length > 0 ? data.products : [...demoTovary];
+                            users = data.users || [];
+                            orders = data.orders || [];
+                            customStatuses = data.customStatuses || [];
+                            saveToLocal();
+                            console.log('✅ Данные загружены с сервера');
+                        } else {
+                            loadFromLocal();
+                        }
+                    } else {
+                        loadFromLocal();
+                    }
+                } catch (e) {
+                    console.log('⚠️ Сервер недоступен, локальный режим');
+                    loadFromLocal();
+                }
+            } else {
+                loadFromLocal();
+            }
+            initApp();
         }
 
-        function saveProducts() { localStorage.setItem('products', JSON.stringify(products)); }
-        function saveUsers() { localStorage.setItem('users', JSON.stringify(users)); }
-        function saveOrders() { localStorage.setItem('orders', JSON.stringify(orders)); }
-        function saveCustomStatuses() { localStorage.setItem('customStatuses', JSON.stringify(customStatuses)); }
-        function saveGuestCart() { localStorage.setItem('guestCart', JSON.stringify(guestCart)); }
-        
-        function saveCurrentUser() {
-            if (currentUser) {
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                const idx = users.findIndex(u => u.id === currentUser.id);
-                if (idx !== -1) { users[idx] = { ...users[idx], ...currentUser, password: users[idx].password }; saveUsers(); }
-            } else { localStorage.removeItem('currentUser'); }
+        function loadFromLocal() {
+            products = JSON.parse(localStorage.getItem('products')) || [...demoTovary];
+            users = JSON.parse(localStorage.getItem('users')) || [];
+            orders = JSON.parse(localStorage.getItem('orders')) || [];
+            customStatuses = JSON.parse(localStorage.getItem('customStatuses')) || [];
+            if (products.length === 0) products = [...demoTovary];
+        }
+
+        function initApp() {
+            currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+            guestCart = JSON.parse(localStorage.getItem('guestCart')) || [];
+            renderProducts();
+            updateCartUI();
+            updateUserInterface();
+            if (currentUser) updateOrdersBadge();
+        }
+
+        function saveToLocal() {
+            localStorage.setItem('products', JSON.stringify(products));
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('customStatuses', JSON.stringify(customStatuses));
+        }
+
+        async function saveToServer() {
+            if (!useServer) return;
+            try {
+                await fetch(SERVER_URL + '?action=saveAll', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ products, users, orders, customStatuses })
+                });
+            } catch (e) {}
+        }
+
+        function saveAllData() {
+            saveToLocal();
+            saveToServer();
         }
 
         function getCart() { return currentUser ? (currentUser.cart || []) : guestCart; }
         
         function saveCart(cart) {
             if (currentUser) { currentUser.cart = cart; saveCurrentUser(); }
-            else { guestCart = cart; saveGuestCart(); }
+            else { guestCart = cart; localStorage.setItem('guestCart', JSON.stringify(guestCart)); }
+        }
+
+        function saveCurrentUser() {
+            if (currentUser) {
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                const idx = users.findIndex(u => u.id === currentUser.id);
+                if (idx !== -1) { users[idx] = { ...users[idx], ...currentUser, password: users[idx].password }; saveAllData(); }
+            } else { localStorage.removeItem('currentUser'); }
         }
 
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             if (!grid) return;
-            grid.innerHTML = '';
-            products.forEach((p, index) => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.style.setProperty('--index', index);
-                card.style.animationDelay = `${0.1 + index * 0.05}s`;
-                card.innerHTML = `
-                    <div class="product-image">${p.imageData ? `<img src="${p.imageData}" alt="${p.name}">` : `<span>${p.image}</span>`}</div>
+            grid.innerHTML = products.map((p, i) => `
+                <div class="product-card" style="--index:${i};">
+                    <div class="product-image">${p.imageData ? `<img src="${p.imageData}" alt="${p.name}">` : `<span style="font-size:3em;">${p.image}</span>`}</div>
                     <div class="product-info">
                         <div class="product-name">${p.name}</div>
                         <div class="product-description">${p.description}</div>
                         <div class="product-price">${p.price.toFixed(2)} ₽</div>
-                        <button class="add-to-cart" onclick="addToCart(${p.id}); this.classList.add('added-to-cart'); setTimeout(() => this.classList.remove('added-to-cart'), 500);">🛒 В корзину</button>
+                        <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 В корзину</button>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                </div>
+            `).join('');
         }
 
-        function addToCart(productId) {
-            const p = products.find(x => x.id === productId);
+        function addToCart(pid) {
+            const p = products.find(x => x.id === pid);
             if (!p) return;
             let cart = getCart();
-            const ex = cart.find(x => x.id === productId);
+            const ex = cart.find(x => x.id === pid);
             if (ex) ex.quantity++;
             else cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, imageData: p.imageData, quantity: 1 });
             saveCart(cart);
             updateCartUI();
             if (currentUser) updateOrdersBadge();
-            const countEl = document.getElementById('cartFloatCount');
-            if (countEl.style.display !== 'none') { countEl.classList.add('bump'); setTimeout(() => countEl.classList.remove('bump'), 500); }
+            const ce = document.getElementById('cartFloatCount');
+            if (ce.style.display !== 'none') { ce.classList.add('bump'); setTimeout(() => ce.classList.remove('bump'), 500); }
             showNotification('✅ Товар добавлен!');
         }
 
-        function removeFromCart(productId) {
+        function removeFromCart(pid) {
             const items = document.querySelectorAll('.cart-popup-item');
-            items.forEach(item => {
-                if (item.dataset.id == productId) {
-                    item.classList.add('removing');
-                    setTimeout(() => {
-                        let cart = getCart().filter(x => x.id !== productId);
-                        saveCart(cart); updateCartUI(); if (currentUser) updateOrdersBadge();
-                    }, 300);
-                }
-            });
-            if (!document.querySelector(`.cart-popup-item[data-id="${productId}"]`)) {
-                let cart = getCart().filter(x => x.id !== productId);
-                saveCart(cart); updateCartUI(); if (currentUser) updateOrdersBadge();
-            }
+            items.forEach(item => { if (item.dataset && item.dataset.id == pid) item.classList.add('removing'); });
+            setTimeout(() => {
+                let cart = getCart().filter(x => x.id !== pid);
+                saveCart(cart);
+                updateCartUI();
+                if (currentUser) updateOrdersBadge();
+            }, 300);
         }
 
-        function updateQuantity(productId, change) {
+        function updateQuantity(pid, change) {
             let cart = getCart();
-            const item = cart.find(x => x.id === productId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) { removeFromCart(productId); return; }
-                saveCart(cart); updateCartUI(); if (currentUser) updateOrdersBadge();
-            }
+            const item = cart.find(x => x.id === pid);
+            if (item) { item.quantity += change; if (item.quantity <= 0) { removeFromCart(pid); return; } saveCart(cart); updateCartUI(); if (currentUser) updateOrdersBadge(); }
         }
 
         function updateCartUI() {
             const cart = getCart();
             const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
             const count = cart.reduce((s, i) => s + i.quantity, 0);
-            const floatCount = document.getElementById('cartFloatCount');
-            if (count > 0) {
-                floatCount.textContent = count;
-                if (floatCount.style.display === 'none') { floatCount.style.display = 'flex'; floatCount.classList.add('bump'); setTimeout(() => floatCount.classList.remove('bump'), 500); }
-            } else { floatCount.style.display = 'none'; }
-            const body = document.getElementById('cartPopupBody'), totalEl = document.getElementById('cartPopupTotal'), buyBtn = document.getElementById('cartBuyBtn'), notice = document.getElementById('cartGuestNotice');
-            if (cart.length === 0) { body.innerHTML = '<p class="cart-popup-empty">Корзина пуста</p>'; buyBtn.disabled = true; totalEl.textContent = 'Итого: 0 ₽'; }
-            else {
-                body.innerHTML = cart.map((item, index) => `<div class="cart-popup-item" data-id="${item.id}" style="--index: ${index}; animation-delay: ${0.05 + index * 0.03}s;"><span>${item.imageData ? `<img src="${item.imageData}" style="width:25px;height:25px;object-fit:cover;border-radius:3px;vertical-align:middle;">` : item.image} ${item.name}</span><div style="display:flex;align-items:center;gap:4px;"><button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.id},-1)" style="padding:2px 6px;">−</button><span style="font-weight:600;min-width:18px;text-align:center;">${item.quantity}</span><button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.id},1)" style="padding:2px 6px;">+</button><span style="font-weight:600;color:#667eea;min-width:60px;text-align:right;">${(item.price*item.quantity).toFixed(2)} ₽</span><button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})" style="padding:2px 6px;">✕</button></div></div>`).join('');
-                buyBtn.disabled = false; totalEl.textContent = `Итого: ${total.toFixed(2)} ₽`;
+            
+            const fc = document.getElementById('cartFloatCount');
+            fc.style.display = count > 0 ? 'flex' : 'none';
+            if (count > 0) fc.textContent = count;
+            
+            const body = document.getElementById('cartPopupBody');
+            const totalEl = document.getElementById('cartPopupTotal');
+            const buyBtn = document.getElementById('cartBuyBtn');
+            const notice = document.getElementById('cartGuestNotice');
+            
+            if (cart.length === 0) {
+                body.innerHTML = '<p class="cart-popup-empty">Корзина пуста</p>';
+                buyBtn.disabled = true;
+                totalEl.textContent = 'Итого: 0 ₽';
+            } else {
+                body.innerHTML = cart.map((item, i) => `
+                    <div class="cart-popup-item" data-id="${item.id}" style="animation-delay:${i*0.05}s;">
+                        <span>${item.image} ${item.name}</span>
+                        <div style="display:flex;align-items:center;gap:4px;">
+                            <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.id},-1)" style="padding:2px 6px;">−</button>
+                            <span>${item.quantity}</span>
+                            <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.id},1)" style="padding:2px 6px;">+</button>
+                            <span style="color:#667eea;font-weight:600;">${(item.price*item.quantity).toFixed(2)} ₽</span>
+                            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">✕</button>
+                        </div>
+                    </div>
+                `).join('');
+                buyBtn.disabled = false;
+                totalEl.textContent = `Итого: ${total.toFixed(2)} ₽`;
             }
             notice.style.display = (!currentUser && cart.length > 0) ? 'block' : 'none';
         }
 
         function toggleCartPopup() {
-            const popup = document.getElementById('cartPopup'), overlay = document.getElementById('cartOverlay');
-            if (popup.classList.contains('active')) { closeCartPopup(); }
-            else { popup.classList.add('active'); popup.classList.remove('closing'); overlay.classList.add('active'); overlay.classList.remove('closing'); }
+            const p = document.getElementById('cartPopup'), o = document.getElementById('cartOverlay');
+            if (p.classList.contains('active')) closeCartPopup();
+            else { p.classList.add('active'); p.classList.remove('closing'); o.classList.add('active'); o.classList.remove('closing'); }
         }
 
         function closeCartPopup() {
-            const popup = document.getElementById('cartPopup'), overlay = document.getElementById('cartOverlay');
-            popup.classList.add('closing'); overlay.classList.add('closing');
-            setTimeout(() => { popup.classList.remove('active', 'closing'); overlay.classList.remove('active', 'closing'); }, 200);
+            const p = document.getElementById('cartPopup'), o = document.getElementById('cartOverlay');
+            p.classList.add('closing'); o.classList.add('closing');
+            setTimeout(() => { p.classList.remove('active', 'closing'); o.classList.remove('active', 'closing'); }, 250);
         }
 
         function handleBuyClick() {
-            const cart = getCart();
-            if (cart.length === 0) { showNotification('❌ Корзина пуста!'); return; }
+            if (getCart().length === 0) { showNotification('❌ Корзина пуста!'); return; }
             closeCartPopup();
-            setTimeout(() => { if (!currentUser) showLoginPromptModal(); else showOrderConfirmation(); }, 250);
+            setTimeout(() => { if (!currentUser) showLoginPromptModal(); else showOrderConfirmation(); }, 300);
         }
 
         function showLoginPromptModal() {
-            const tempModal = document.createElement('div');
-            tempModal.className = 'modal';
-            tempModal.innerHTML = `<div class="modal-content"><h3>🔐 Требуется авторизация</h3><p style="margin:15px 0;color:#666;">Для оформления заказа необходимо войти в систему или зарегистрироваться.</p><p style="margin:10px 0;font-size:0.9em;color:#856404;background:#fff3cd;padding:10px;border-radius:6px;">💡 Все товары в корзине сохранятся после входа</p><div style="display:flex;gap:8px;margin-top:20px;"><button class="btn btn-primary" style="flex:1;" onclick="closeTempModal(this);showLoginUserModal();">🔑 Войти</button><button class="btn btn-info" style="flex:1;" onclick="closeTempModal(this);showRegisterModal();">📝 Регистрация</button></div><button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="closeTempModal(this);">Отмена</button></div>`;
-            document.body.appendChild(tempModal);
-            requestAnimationFrame(() => { tempModal.classList.add('active'); });
-            tempModal.addEventListener('click', function(e) { if (e.target === tempModal) closeTempModal(tempModal); });
+            const m = document.createElement('div'); m.className = 'modal active';
+            m.innerHTML = `<div class="modal-content"><h3>🔐 Авторизация</h3><p style="margin:15px 0;">Войдите или зарегистрируйтесь</p><div style="display:flex;gap:8px;"><button class="btn btn-primary" style="flex:1;" onclick="this.closest('.modal').remove();showLoginUserModal();">🔑 Войти</button><button class="btn btn-info" style="flex:1;" onclick="this.closest('.modal').remove();showRegisterModal();">📝 Регистрация</button></div><button class="btn btn-secondary btn-block" style="margin-top:8px;" onclick="this.closest('.modal').remove();">Отмена</button></div>`;
+            document.body.appendChild(m);
+            m.addEventListener('click', e => { if (e.target === m) { m.classList.add('closing'); setTimeout(() => m.remove(), 300); } });
         }
 
-        function closeTempModal(el) { const modal = el.closest('.modal'); modal.classList.add('closing'); setTimeout(() => modal.remove(), 300); }
-
         function showOrderConfirmation() {
-            if (!currentUser || !currentUser.cart?.length) { showNotification('❌ Корзина пуста!'); return; }
-            document.getElementById('orderUserInfo').innerHTML = `<div style="background:#f8f9fa;padding:10px;border-radius:8px;margin-bottom:12px;font-size:0.9em;"><p><strong>👤 ${currentUser.name}</strong> | 📞 ${currentUser.phone} | 📧 ${currentUser.email}</p>${currentUser.telegram ? `<p>📱 <a href="https://t.me/${currentUser.telegram}" target="_blank" class="telegram-link">@${currentUser.telegram}</a></p>` : ''}</div>`;
-            document.getElementById('orderItemsList').innerHTML = currentUser.cart.map(item => `<div class="order-item"><span>${item.image} ${item.name} x${item.quantity}</span><span>${(item.price*item.quantity).toFixed(2)} ₽</span></div>`).join('');
-            document.getElementById('orderTelegramContact').innerHTML = currentUser.telegram ? `<div class="contact-info">📱 Связь: <a href="https://t.me/${currentUser.telegram}" target="_blank" class="telegram-link">@${currentUser.telegram}</a></div>` : `<div class="contact-info">💡 Укажите Telegram в профиле!</div>`;
+            if (!currentUser?.cart?.length) return;
+            document.getElementById('orderUserInfo').innerHTML = `<p><strong>👤 ${currentUser.name}</strong> | 📞 ${currentUser.phone} | 📧 ${currentUser.email}</p>`;
+            document.getElementById('orderItemsList').innerHTML = currentUser.cart.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('');
             document.getElementById('orderTotal').textContent = `💰 Итого: ${currentUser.cart.reduce((s,i) => s + i.price*i.quantity, 0).toFixed(2)} ₽`;
+            document.getElementById('orderTelegramContact').innerHTML = currentUser.telegram ? `<div class="contact-info">📱 Связь: <a href="https://t.me/${currentUser.telegram}" target="_blank" class="telegram-link">@${currentUser.telegram}</a></div>` : '';
             openModal('orderModal');
         }
 
-        function closeOrderModal() { closeModal('orderModal'); }
-
         function confirmOrder() {
-            if (!currentUser) return;
-            orders.unshift({ id: Date.now(), userId: currentUser.id, date: new Date().toLocaleString('ru-RU'), customer: { name: currentUser.name, phone: currentUser.phone, email: currentUser.email, telegram: currentUser.telegram || '' }, items: [...currentUser.cart], total: currentUser.cart.reduce((s,i) => s + i.price*i.quantity, 0), status: 'new', timeline: [{ status: 'new', date: new Date().toLocaleString('ru-RU'), text: 'Заказ создан' }] });
-            saveOrders(); saveCart([]); updateCartUI(); updateOrdersBadge(); closeOrderModal(); showNotification('✅ Заказ оформлен!');
+            if (!currentUser?.cart?.length) return;
+            orders.unshift({
+                id: Date.now(), userId: currentUser.id, date: new Date().toLocaleString('ru-RU'),
+                customer: { name: currentUser.name, phone: currentUser.phone, email: currentUser.email, telegram: currentUser.telegram || '' },
+                items: [...currentUser.cart], total: currentUser.cart.reduce((s,i) => s + i.price*i.quantity, 0),
+                status: 'new', timeline: [{ status: 'new', date: new Date().toLocaleString('ru-RU'), text: 'Заказ создан' }]
+            });
+            saveAllData();
+            saveCart([]);
+            updateCartUI();
+            updateOrdersBadge();
+            closeModal('orderModal');
+            showNotification('✅ Заказ оформлен!');
         }
 
-        function openModal(id) { const modal = document.getElementById(id); modal.classList.add('active'); modal.classList.remove('closing'); }
-        function closeModal(id) { const modal = document.getElementById(id); modal.classList.add('closing'); setTimeout(() => { modal.classList.remove('active', 'closing'); }, 300); }
+        function openModal(id) {
+            const m = document.getElementById(id);
+            if (m) { m.classList.add('active'); m.classList.remove('closing'); }
+        }
+
+        function closeModal(id) {
+            const m = document.getElementById(id);
+            if (m) { m.classList.add('closing'); setTimeout(() => { m.classList.remove('active', 'closing'); }, 300); }
+        }
+
+        function showRegisterModal() { openModal('registerModal'); }
+        function showLoginUserModal() { openModal('loginUserModal'); }
+        function showAdminLoginModal() { openModal('adminLoginModal'); }
+
+        function registerUser() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const phone = document.getElementById('regPhone').value.trim();
+            const telegram = document.getElementById('regTelegram').value.replace('@', '').trim();
+            
+            if (!name || !email || !password || !phone) { alert('Заполните все поля!'); return; }
+            if (users.find(u => u.email === email)) { alert('❌ Email занят!'); return; }
+            
+            const nu = { id: Date.now(), name, email, password, phone, telegram, cart: [...guestCart], registrationDate: new Date().toLocaleString('ru-RU') };
+            users.push(nu);
+            saveAllData();
+            closeModal('registerModal');
+            document.getElementById('registerModal').querySelector('form').reset();
+            currentUser = { ...nu }; delete currentUser.password;
+            saveCurrentUser();
+            guestCart = [];
+            localStorage.setItem('guestCart', JSON.stringify(guestCart));
+            updateUserInterface();
+            updateCartUI();
+            showNotification('✅ Регистрация успешна!');
+        }
+
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const u = users.find(u => u.email === email && u.password === password);
+            
+            if (u) {
+                if (guestCart.length > 0) {
+                    if (!u.cart) u.cart = [];
+                    guestCart.forEach(g => { const ex = u.cart.find(x => x.id === g.id); if (ex) ex.quantity += g.quantity; else u.cart.push({...g}); });
+                    guestCart = [];
+                    localStorage.setItem('guestCart', JSON.stringify(guestCart));
+                }
+                currentUser = { ...u }; delete currentUser.password;
+                saveCurrentUser();
+                closeModal('loginUserModal');
+                document.getElementById('loginUserModal').querySelector('form').reset();
+                updateUserInterface();
+                updateCartUI();
+                updateOrdersBadge();
+                showNotification(`👋 С возвращением, ${currentUser.name}!`);
+            } else {
+                alert('❌ Неверный email или пароль!');
+            }
+        }
+
+        function loginAdmin() {
+            if (document.getElementById('adminUsername').value.trim() === 'Ars53728' && document.getElementById('adminPassword').value === 'Ars3n1xz') {
+                isAdmin = true;
+                closeModal('adminLoginModal');
+                document.getElementById('adminLoginModal').querySelector('form').reset();
+                document.getElementById('shopContainer').style.display = 'none';
+                document.getElementById('mainFooter').style.display = 'none';
+                document.querySelector('.cart-float-btn').style.display = 'none';
+                document.getElementById('cartPopup').classList.remove('active');
+                document.getElementById('cartOverlay').classList.remove('active');
+                document.getElementById('adminPanel').classList.add('active');
+                renderAdminProducts();
+                renderCustomStatuses();
+                showNotification('👑 Добро пожаловать!');
+            } else {
+                alert('❌ Неверный логин или пароль!\n\nЛогин: Ars53728\nПароль: Ars3n1xz');
+            }
+        }
+
+        function logoutUser() {
+            if (currentUser?.cart) { guestCart = [...currentUser.cart]; localStorage.setItem('guestCart', JSON.stringify(guestCart)); }
+            currentUser = null; saveCurrentUser(); updateUserInterface(); updateCartUI();
+            showNotification('👋 Вы вышли');
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('shopContainer').style.display = 'block';
+            document.getElementById('mainFooter').style.display = 'block';
+            document.querySelector('.cart-float-btn').style.display = 'flex';
+            renderProducts(); updateCartUI();
+            showNotification('👋 Вы вышли');
+        }
+
+        function updateUserInterface() {
+            if (currentUser) {
+                document.getElementById('userNotLoggedIn').style.display = 'none';
+                document.getElementById('userLoggedIn').style.display = 'flex';
+                document.getElementById('userDisplayName').textContent = currentUser.name;
+                document.getElementById('userDisplayEmail').textContent = currentUser.email;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                updateOrdersBadge();
+            } else {
+                document.getElementById('userNotLoggedIn').style.display = 'flex';
+                document.getElementById('userLoggedIn').style.display = 'none';
+            }
+        }
 
         function showProfileModal() {
             if (!currentUser) return;
@@ -1308,125 +1140,87 @@
             document.getElementById('profileInfoEmail').textContent = currentUser.email;
             document.getElementById('profileInfoPhone').textContent = currentUser.phone;
             document.getElementById('profileInfoTelegram').textContent = currentUser.telegram ? '@'+currentUser.telegram : 'Не указан';
-            document.getElementById('profileInfoRegDate').textContent = currentUser.registrationDate || 'Неизвестно';
-            document.getElementById('editName').value = currentUser.name; document.getElementById('editEmail').value = currentUser.email;
-            document.getElementById('editPhone').value = currentUser.phone; document.getElementById('editTelegram').value = currentUser.telegram || '';
-            document.getElementById('editPassword').value = ''; openModal('profileModal');
+            document.getElementById('profileInfoRegDate').textContent = currentUser.registrationDate || '';
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editEmail').value = currentUser.email;
+            document.getElementById('editPhone').value = currentUser.phone;
+            document.getElementById('editTelegram').value = currentUser.telegram || '';
+            document.getElementById('editPassword').value = '';
+            openModal('profileModal');
         }
 
-        function closeProfileModal() { closeModal('profileModal'); }
-
-        document.getElementById('profileEditForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nn = document.getElementById('editName').value, ne = document.getElementById('editEmail').value;
-            const np = document.getElementById('editPhone').value, nt = document.getElementById('editTelegram').value.replace('@','');
-            if (users.find(u => u.email === ne && u.id !== currentUser.id)) { alert('❌ Email занят!'); return; }
+        function saveProfile() {
+            const nn = document.getElementById('editName').value.trim();
+            const ne = document.getElementById('editEmail').value.trim();
+            const np = document.getElementById('editPhone').value.trim();
+            const nt = document.getElementById('editTelegram').value.replace('@', '').trim();
+            if (!nn || !ne || !np) { alert('Заполните обязательные поля!'); return; }
             currentUser.name = nn; currentUser.email = ne; currentUser.phone = np; currentUser.telegram = nt;
             const idx = users.findIndex(u => u.id === currentUser.id);
-            if (idx !== -1) { users[idx].name = nn; users[idx].email = ne; users[idx].phone = np; users[idx].telegram = nt; if (document.getElementById('editPassword').value) users[idx].password = document.getElementById('editPassword').value; saveUsers(); }
-            saveCurrentUser(); updateUserInterface(); closeProfileModal(); showNotification('✅ Профиль обновлен!');
-        });
+            if (idx !== -1) {
+                users[idx].name = nn; users[idx].email = ne; users[idx].phone = np; users[idx].telegram = nt;
+                if (document.getElementById('editPassword').value) users[idx].password = document.getElementById('editPassword').value;
+                saveAllData();
+            }
+            saveCurrentUser(); updateUserInterface(); closeModal('profileModal');
+            showNotification('✅ Профиль обновлен!');
+        }
 
         function showMyOrders() {
             if (!currentUser) return;
             const mo = orders.filter(o => o.userId === currentUser.id);
             const ml = document.getElementById('myOrdersList');
-            if (mo.length === 0) { ml.innerHTML = '<div style="text-align:center;padding:30px;color:#999;">📦 Заказов нет</div>'; }
-            else { ml.innerHTML = mo.map(order => { const si = getStatusInfo(order.status); return `<div class="order-card"><div class="order-header"><div><strong>📦 Заказ #${order.id}</strong><br><small>📅 ${order.date}</small></div><span class="order-status" style="background:${si.bg};color:${si.color};border-color:${si.border};">${si.icon} ${si.text}</span></div><div class="order-items">${order.items.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('')}</div><div class="order-total">💰 Итого: ${order.total.toFixed(2)} ₽</div>${order.cancellationReason ? `<div class="cancellation-reason"><strong>❌ Причина отмены:</strong> ${order.cancellationReason}</div>` : ''}${order.customer.telegram ? `<div class="contact-info">📱 <a href="https://t.me/${order.customer.telegram}" target="_blank" class="telegram-link">@${order.customer.telegram}</a></div>` : ''}<div class="order-timeline"><strong>📋 История:</strong>${(order.timeline||[]).map((t, i) => `<div class="timeline-item" style="animation-delay:${i*0.1}s;">• ${t.text} <small>${t.date}</small></div>`).join('')}</div></div>`; }).join(''); }
+            if (mo.length === 0) { ml.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">Заказов нет</p>'; }
+            else {
+                ml.innerHTML = mo.map(order => {
+                    const si = getStatusInfo(order.status);
+                    return `<div class="order-card"><div class="order-header"><div><strong>📦 Заказ #${order.id}</strong><br><small>📅 ${order.date}</small></div><span class="order-status ${si.class}">${si.icon} ${si.text}</span></div><div class="order-items">${order.items.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('')}</div><div class="order-total">💰 ${order.total.toFixed(2)} ₽</div>${order.cancellationReason ? `<div class="cancellation-reason"><strong>❌ Причина отмены:</strong> ${order.cancellationReason}</div>` : ''}<div class="order-timeline"><strong>📋 История:</strong>${(order.timeline||[]).map(t => `<div>• ${t.text} <small>${t.date}</small></div>`).join('')}</div></div>`;
+                }).join('');
+            }
             openModal('myOrdersModal');
         }
 
-        function closeMyOrdersModal() { closeModal('myOrdersModal'); }
-
         function getStatusInfo(status) {
             const cs = customStatuses.find(s => s.id === status);
-            if (cs) return { bg: cs.color+'22', color: cs.color, border: cs.color, icon: '🏷️', text: cs.name };
-            const map = { 'new': { bg: '#fff3cd', color: '#856404', border: '#ffc107', icon: '🆕', text: 'Новый' }, 'processing': { bg: '#cce5ff', color: '#004085', border: '#2196F3', icon: '🔄', text: 'В обработке' }, 'completed': { bg: '#d4edda', color: '#155724', border: '#28a745', icon: '✅', text: 'Выполнен' }, 'cancelled': { bg: '#f8d7da', color: '#721c24', border: '#dc3545', icon: '❌', text: 'Отменён' } };
-            return map[status] || map['new'];
+            if (cs) return { class: 'status-new', icon: '🏷️', text: cs.name };
+            const m = {
+                'new': { class: 'status-new', icon: '🆕', text: 'Новый' },
+                'processing': { class: 'status-processing', icon: '🔄', text: 'В обработке' },
+                'completed': { class: 'status-completed', icon: '✅', text: 'Выполнен' },
+                'cancelled': { class: 'status-cancelled', icon: '❌', text: 'Отменён' }
+            };
+            return m[status] || m['new'];
         }
 
         function updateOrdersBadge() {
             if (!currentUser) return;
             const active = orders.filter(o => o.userId === currentUser.id && o.status !== 'completed' && o.status !== 'cancelled');
             const badge = document.getElementById('ordersBadge');
-            if (badge) { if (active.length) { badge.textContent = active.length; if (badge.style.display === 'none') badge.classList.add('bump'); badge.style.display = 'inline'; setTimeout(() => badge.classList.remove('bump'), 500); } else badge.style.display = 'none'; }
+            if (badge) { badge.style.display = active.length ? 'inline' : 'none'; if (active.length) badge.textContent = active.length; }
         }
 
         function showCancelOrderModal(oid) { document.getElementById('cancelOrderId').value = oid; openModal('cancelOrderModal'); }
-        function closeCancelOrderModal() { closeModal('cancelOrderModal'); }
 
-        document.getElementById('cancelOrderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function cancelOrder() {
             const oid = parseInt(document.getElementById('cancelOrderId').value);
             const reason = document.getElementById('cancelReason').value.trim();
             if (!reason) { alert('Укажите причину!'); return; }
             const order = orders.find(o => o.id === oid);
-            if (order) { order.status = 'cancelled'; order.cancellationReason = reason; if (!order.timeline) order.timeline = []; order.timeline.push({ status: 'cancelled', date: new Date().toLocaleString('ru-RU'), text: `Отменён. Причина: ${reason}` }); saveOrders(); renderAdminOrders(); closeCancelOrderModal(); showNotification('❌ Заказ отменён'); }
-        });
-
-        function showRegisterModal() { openModal('registerModal'); }
-        function closeRegisterModal() { closeModal('registerModal'); }
-        function showLoginUserModal() { openModal('loginUserModal'); }
-        function closeLoginUserModal() { closeModal('loginUserModal'); }
-
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('regEmail').value;
-            if (users.find(u => u.email === email)) { alert('❌ Email занят!'); return; }
-            const nu = { id: Date.now(), name: document.getElementById('regName').value, email, password: document.getElementById('regPassword').value, phone: document.getElementById('regPhone').value, telegram: document.getElementById('regTelegram').value.replace('@',''), cart: [...guestCart], registrationDate: new Date().toLocaleString('ru-RU') };
-            users.push(nu); saveUsers(); closeRegisterModal(); document.getElementById('registerForm').reset();
-            currentUser = {...nu}; delete currentUser.password; saveCurrentUser(); guestCart = []; saveGuestCart();
-            updateUserInterface(); updateCartUI(); showNotification('✅ Регистрация успешна!');
-        });
-
-        document.getElementById('loginUserForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const u = users.find(u => u.email === document.getElementById('loginEmail').value && u.password === document.getElementById('loginPassword').value);
-            if (u) {
-                if (guestCart.length > 0) { if (!u.cart) u.cart = []; guestCart.forEach(g => { const ex = u.cart.find(x => x.id === g.id); if (ex) ex.quantity += g.quantity; else u.cart.push({...g}); }); guestCart = []; saveGuestCart(); }
-                currentUser = {...u}; delete currentUser.password; saveCurrentUser();
-                closeLoginUserModal(); document.getElementById('loginUserForm').reset();
-                updateUserInterface(); updateCartUI(); updateOrdersBadge(); showNotification(`👋 С возвращением, ${currentUser.name}!`);
-            } else alert('❌ Неверный email или пароль!');
-        });
-
-        function logoutUser() { if (currentUser?.cart) { guestCart = [...currentUser.cart]; saveGuestCart(); } currentUser = null; saveCurrentUser(); updateUserInterface(); updateCartUI(); showNotification('👋 Вы вышли'); }
-
-        function updateUserInterface() {
-            if (currentUser) { document.getElementById('userNotLoggedIn').style.display = 'none'; document.getElementById('userLoggedIn').style.display = 'flex'; document.getElementById('userDisplayName').textContent = currentUser.name; document.getElementById('userDisplayEmail').textContent = currentUser.email; document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase(); updateOrdersBadge(); }
-            else { document.getElementById('userNotLoggedIn').style.display = 'flex'; document.getElementById('userLoggedIn').style.display = 'none'; }
-        }
-
-        function showAdminLoginModal() { openModal('adminLoginModal'); }
-        function closeAdminLoginModal() { closeModal('adminLoginModal'); }
-
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (document.getElementById('adminUsername').value === 'Ars53728' && document.getElementById('adminPassword').value === 'Ars3n1xz') {
-                isAdmin = true; closeAdminLoginModal(); document.getElementById('adminLoginForm').reset();
-                document.getElementById('shopContainer').style.display = 'none';
-                document.getElementById('mainFooter').style.display = 'none';
-                document.querySelector('.cart-float-btn').style.display = 'none';
-                document.getElementById('cartPopup').classList.remove('active');
-                document.getElementById('cartOverlay').classList.remove('active');
-                document.getElementById('adminPanel').classList.add('active');
-                renderAdminProducts(); renderCustomStatuses(); showNotification(' Добро пожаловать в админ-панель!');
-            } else alert('❌ Неверные данные!');
-        });
-
-        function logoutAdmin() {
-            isAdmin = false; document.getElementById('adminPanel').classList.remove('active');
-            document.getElementById('shopContainer').style.display = 'block';
-            document.getElementById('mainFooter').style.display = 'block';
-            document.querySelector('.cart-float-btn').style.display = 'flex';
-            renderProducts(); updateCartUI(); showNotification('👋 Вы вышли из админ-панели');
+            if (order) {
+                order.status = 'cancelled'; order.cancellationReason = reason;
+                if (!order.timeline) order.timeline = [];
+                order.timeline.push({ status: 'cancelled', date: new Date().toLocaleString('ru-RU'), text: `Отменён: ${reason}` });
+                saveAllData(); renderAdminOrders(); closeModal('cancelOrderModal');
+                showNotification('❌ Заказ отменён');
+            }
         }
 
         function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-'+tabName).style.display = 'block';
-            event.target.classList.add('active');
+            document.querySelectorAll('#adminPanel .tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('#adminPanel .tab-btn').forEach(b => b.classList.remove('active'));
+            const tab = document.getElementById('tab-' + tabName);
+            if (tab) tab.style.display = 'block';
+            if (event && event.target) event.target.classList.add('active');
             if (tabName === 'orders') renderAdminOrders();
             if (tabName === 'users') renderUsersList();
             if (tabName === 'statuses') renderCustomStatuses();
@@ -1435,15 +1229,21 @@
         function previewImage(input) {
             if (input.files[0]) {
                 const r = new FileReader();
-                r.onload = function(e) { document.getElementById('imagePreview').innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`; document.getElementById('productImageData').value = e.target.result; };
+                r.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`;
+                    document.getElementById('productImageData').value = e.target.result;
+                };
                 r.readAsDataURL(input.files[0]);
             }
         }
 
         function resetProductForm() {
-            document.getElementById('productId').value = ''; document.getElementById('productName').value = '';
-            document.getElementById('productDescription').value = ''; document.getElementById('productPrice').value = '';
-            document.getElementById('productImageFile').value = ''; document.getElementById('productImageData').value = '';
+            document.getElementById('productId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productImageFile').value = '';
+            document.getElementById('productImageData').value = '';
             document.getElementById('imagePreview').innerHTML = '<span style="color:#999;">Превью</span>';
             document.getElementById('formTitle').textContent = 'Добавить новый товар';
         }
@@ -1451,29 +1251,42 @@
         function editProduct(pid) {
             const p = products.find(x => x.id === pid);
             if (p) {
-                document.getElementById('productId').value = p.id; document.getElementById('productName').value = p.name;
-                document.getElementById('productDescription').value = p.description; document.getElementById('productPrice').value = p.price;
+                document.getElementById('productId').value = p.id;
+                document.getElementById('productName').value = p.name;
+                document.getElementById('productDescription').value = p.description;
+                document.getElementById('productPrice').value = p.price;
                 document.getElementById('productImageData').value = p.imageData || '';
                 document.getElementById('imagePreview').innerHTML = p.imageData ? `<img src="${p.imageData}" style="width:100%;height:100%;object-fit:cover;">` : `<span style="font-size:2em;">${p.image}</span>`;
                 document.getElementById('formTitle').textContent = 'Редактировать товар';
             }
         }
 
-        document.getElementById('productForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const pid = document.getElementById('productId').value, name = document.getElementById('productName').value;
-            const desc = document.getElementById('productDescription').value, price = parseFloat(document.getElementById('productPrice').value);
+        function saveProduct() {
+            const pid = document.getElementById('productId').value;
+            const name = document.getElementById('productName').value.trim();
+            const desc = document.getElementById('productDescription').value.trim();
+            const price = parseFloat(document.getElementById('productPrice').value);
             const imgData = document.getElementById('productImageData').value;
-            if (pid) { const idx = products.findIndex(p => p.id === parseInt(pid)); if (idx !== -1) products[idx] = { ...products[idx], name, description: desc, price, imageData: imgData, image: imgData ? '🖼️' : products[idx].image }; }
-            else products.push({ id: Math.max(...products.map(p => p.id), 0) + 1, name, description: desc, price, image: imgData ? '🖼️' : '📦', imageData: imgData });
-            saveProducts(); renderAdminProducts(); resetProductForm(); showNotification('✅ Товар сохранен!');
-        });
+            if (!name || !desc || isNaN(price)) { alert('Заполните все поля!'); return; }
+            if (pid) {
+                const idx = products.findIndex(p => p.id === parseInt(pid));
+                if (idx !== -1) products[idx] = { ...products[idx], name, description: desc, price, imageData: imgData, image: imgData ? '🖼️' : products[idx].image };
+            } else {
+                products.push({ id: Date.now(), name, description: desc, price, image: imgData ? '🖼️' : '📦', imageData: imgData });
+            }
+            saveAllData(); renderAdminProducts(); resetProductForm();
+            showNotification('✅ Товар сохранен!');
+        }
 
         function deleteProduct(pid) {
             if (confirm('Удалить товар?')) {
                 const items = document.querySelectorAll('.admin-product-item');
-                items.forEach(item => { if (item.dataset && item.dataset.pid == pid) { item.classList.add('removing'); setTimeout(() => { products = products.filter(p => p.id !== pid); saveProducts(); renderAdminProducts(); showNotification('🗑️ Товар удален!'); }, 300); } });
-                if (!document.querySelector(`.admin-product-item[data-pid="${pid}"]`)) { products = products.filter(p => p.id !== pid); saveProducts(); renderAdminProducts(); showNotification('🗑️ Товар удален!'); }
+                items.forEach(item => { if (item.dataset && item.dataset.pid == pid) item.classList.add('removing'); });
+                setTimeout(() => {
+                    products = products.filter(p => p.id !== pid);
+                    saveAllData(); renderAdminProducts();
+                    showNotification('🗑️ Товар удален!');
+                }, 300);
             }
         }
 
@@ -1486,10 +1299,16 @@
 
         function updateOrderStatus(oid, newStatus) {
             const order = orders.find(o => o.id === oid);
-            if (order) { order.status = newStatus; if (!order.timeline) order.timeline = []; order.timeline.push({ status: newStatus, date: new Date().toLocaleString('ru-RU'), text: `Статус: ${getStatusInfo(newStatus).text}` }); saveOrders(); renderAdminOrders(); showNotification('📝 Статус обновлен'); }
+            if (order) {
+                order.status = newStatus;
+                if (!order.timeline) order.timeline = [];
+                order.timeline.push({ status: newStatus, date: new Date().toLocaleString('ru-RU'), text: `Статус: ${getStatusInfo(newStatus).text}` });
+                saveAllData(); renderAdminOrders();
+                showNotification('📝 Статус обновлен');
+            }
         }
 
-        function deleteOrder(oid) { if (confirm('Удалить заказ?')) { orders = orders.filter(o => o.id !== oid); saveOrders(); renderAdminOrders(); showNotification('🗑️ Заказ удален'); } }
+        function deleteOrder(oid) { if (confirm('Удалить заказ?')) { orders = orders.filter(o => o.id !== oid); saveAllData(); renderAdminOrders(); showNotification('🗑️ Заказ удален'); } }
 
         function renderAdminOrders() {
             const list = document.getElementById('adminOrdersList');
@@ -1498,7 +1317,7 @@
             const allStatuses = [{ id: 'processing', name: 'В обработке' }, { id: 'completed', name: 'Выполнен' }, ...customStatuses.map(s => ({ id: s.id, name: s.name }))];
             list.innerHTML = orders.map((order, i) => {
                 const si = getStatusInfo(order.status);
-                return `<div class="order-card" style="animation-delay:${i*0.1}s;"><div class="order-header"><div><strong>📦 Заказ #${order.id}</strong><br><small>📅 ${order.date}</small></div><span class="order-status" style="background:${si.bg};color:${si.color};border-color:${si.border};">${si.icon} ${si.text}</span></div><div style="background:#f8f9fa;padding:8px;border-radius:6px;margin-bottom:10px;font-size:0.85em;"><strong>👤 ${order.customer.name}</strong> | 📞 ${order.customer.phone} | 📧 ${order.customer.email}${order.customer.telegram ? ` | 📱 <a href="https://t.me/${order.customer.telegram}" target="_blank" class="telegram-link">@${order.customer.telegram}</a>` : ''}</div><div class="order-items">${order.items.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('')}</div><div class="order-total">💰 Итого: ${order.total.toFixed(2)} ₽</div>${order.cancellationReason ? `<div class="cancellation-reason"><strong>❌ Причина отмены:</strong> ${order.cancellationReason}</div>` : ''}${order.status !== 'cancelled' && order.status !== 'completed' ? `<div style="margin-top:10px;"><strong>Изменить статус:</strong><div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;">${allStatuses.map(s => `<button class="btn btn-sm btn-info" onclick="updateOrderStatus(${order.id},'${s.id}')">${s.name}</button>`).join('')}<button class="btn btn-sm btn-danger" onclick="showCancelOrderModal(${order.id})">❌ Отменить</button></div></div>` : ''}<div style="text-align:right;margin-top:10px;"><button class="btn btn-sm btn-secondary" onclick="deleteOrder(${order.id})">🗑️ Удалить</button></div></div>`;
+                return `<div class="order-card" style="animation-delay:${i*0.1}s;"><div class="order-header"><div><strong>📦 Заказ #${order.id}</strong><br><small>📅 ${order.date}</small></div><span class="order-status ${si.class}">${si.icon} ${si.text}</span></div><div style="background:#f8f9fa;padding:8px;border-radius:6px;margin-bottom:10px;font-size:0.85em;"><strong>👤 ${order.customer.name}</strong> | 📞 ${order.customer.phone} | 📧 ${order.customer.email}</div><div class="order-items">${order.items.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('')}</div><div class="order-total">💰 ${order.total.toFixed(2)} ₽</div>${order.cancellationReason ? `<div class="cancellation-reason"><strong>❌ Причина отмены:</strong> ${order.cancellationReason}</div>` : ''}${order.status !== 'cancelled' && order.status !== 'completed' ? `<div style="margin-top:10px;"><strong>Изменить статус:</strong><div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;">${allStatuses.map(s => `<button class="btn btn-sm btn-info" onclick="updateOrderStatus(${order.id},'${s.id}')">${s.name}</button>`).join('')}<button class="btn btn-sm btn-danger" onclick="showCancelOrderModal(${order.id})">❌ Отменить</button></div></div>` : ''}<div style="text-align:right;margin-top:10px;"><button class="btn btn-sm btn-secondary" onclick="deleteOrder(${order.id})">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -1506,35 +1325,49 @@
             const list = document.getElementById('usersList');
             if (!list) return;
             if (!users.length) { list.innerHTML = '<p style="color:#999;text-align:center;padding:30px;">Пользователей нет</p>'; return; }
-            list.innerHTML = users.map((u, i) => { const uo = orders.filter(o => o.userId === u.id); return `<div class="order-card" style="animation-delay:${i*0.1}s;"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;"><div><strong>👤 ${u.name}</strong><p style="margin:3px 0;">📧 ${u.email} | 📞 ${u.phone}</p>${u.telegram ? `<p style="margin:3px 0;">📱 <a href="https://t.me/${u.telegram}" target="_blank" class="telegram-link">@${u.telegram}</a></p>` : '<p style="color:#999;margin:3px 0;">📱 Telegram не указан</p>'}<p style="margin:3px 0;font-size:0.8em;color:#666;">📅 ${u.registrationDate} | 🛒 ${u.cart?.length||0} товаров</p></div><div style="text-align:center;"><span style="font-size:1.8em;font-weight:bold;color:#667eea;">${uo.length}</span><br><small>заказов</small></div></div></div>`; }).join('');
+            list.innerHTML = users.map(u => {
+                const uo = orders.filter(o => o.userId === u.id);
+                return `<div class="order-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;"><div><strong>👤 ${u.name}</strong><p>📧 ${u.email} | 📞 ${u.phone}</p>${u.telegram ? `<p>📱 <a href="https://t.me/${u.telegram}" target="_blank" class="telegram-link">@${u.telegram}</a></p>` : ''}<p style="font-size:0.8em;color:#666;">📅 ${u.registrationDate} | 🛒 ${u.cart?.length||0} товаров</p></div><div style="text-align:center;"><span style="font-size:1.8em;font-weight:bold;color:#667eea;">${uo.length}</span><br><small>заказов</small></div></div></div>`;
+            }).join('');
         }
 
         function addCustomStatus() {
-            const name = document.getElementById('newStatusName').value.trim(), color = document.getElementById('newStatusColor').value;
+            const name = document.getElementById('newStatusName').value.trim();
+            const color = document.getElementById('newStatusColor').value;
             if (!name) { alert('Введите название!'); return; }
-            customStatuses.push({ id: 'custom_'+Date.now(), name, color }); saveCustomStatuses(); renderCustomStatuses();
-            document.getElementById('newStatusName').value = ''; showNotification('✅ Статус добавлен!');
+            customStatuses.push({ id: 'custom_'+Date.now(), name, color });
+            saveAllData(); renderCustomStatuses();
+            document.getElementById('newStatusName').value = '';
+            showNotification('✅ Статус добавлен!');
         }
 
-        function removeCustomStatus(sid) { if (confirm('Удалить статус?')) { customStatuses = customStatuses.filter(s => s.id !== sid); saveCustomStatuses(); renderCustomStatuses(); showNotification('🗑️ Статус удален'); } }
+        function removeCustomStatus(sid) { if (confirm('Удалить?')) { customStatuses = customStatuses.filter(s => s.id !== sid); saveAllData(); renderCustomStatuses(); showNotification('🗑️ Статус удален'); } }
 
         function renderCustomStatuses() {
             const list = document.getElementById('customStatusList');
             if (!list) return;
             if (!customStatuses.length) { list.innerHTML = '<p style="color:#999;text-align:center;padding:15px;">Статусов нет</p>'; return; }
-            list.innerHTML = '<h4 style="margin-bottom:8px;">Созданные статусы:</h4>' + customStatuses.map((s, i) => `<div class="status-item" style="animation-delay:${i*0.1}s;"><div><span class="status-color-box" style="background:${s.color};"></span><strong>${s.name}</strong></div><button class="btn btn-sm btn-danger" onclick="removeCustomStatus('${s.id}')">🗑️</button></div>`).join('');
+            list.innerHTML = customStatuses.map(s => `<div class="status-item"><div><span class="status-color-box" style="background:${s.color};"></span><strong>${s.name}</strong></div><button class="btn btn-sm btn-danger" onclick="removeCustomStatus('${s.id}')">🗑️</button></div>`).join('');
         }
 
         function showNotification(msg) {
-            const n = document.createElement('div'); n.className = 'notification'; n.textContent = msg;
+            const n = document.createElement('div');
+            n.className = 'notification';
+            n.textContent = msg;
             document.body.appendChild(n);
             setTimeout(() => { n.classList.add('hiding'); setTimeout(() => n.remove(), 300); }, 2500);
         }
 
-        document.querySelectorAll('.modal').forEach(m => { m.addEventListener('click', function(e) { if (e.target === this) { this.classList.add('closing'); setTimeout(() => this.classList.remove('active', 'closing'), 300); } }); });
+        document.querySelectorAll('.modal').forEach(m => {
+            m.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('closing');
+                    setTimeout(() => { this.classList.remove('active', 'closing'); }, 300);
+                }
+            });
+        });
 
-        renderProducts(); updateCartUI(); updateUserInterface();
-        if (currentUser) updateOrdersBadge();
+        loadData();
     </script>
 </body>
 </html>
