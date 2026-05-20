@@ -787,15 +787,15 @@
         let isAdmin = false;
 
         const demoTovary = [
-            { id: 1, name: '3D Динозавр', description: 'Реалистичная фигурка тираннозавра. Высота 15 см.', price: 1290, image: '🦕', imageData: '' },
-            { id: 2, name: 'Кубик Рубика', description: 'Функциональный кубик Рубика с 3D печати.', price: 890, image: '🎲', imageData: '' },
-            { id: 3, name: 'Робот-трансформер', description: 'Трансформирующийся робот с подвижными деталями.', price: 1590, image: '🤖', imageData: '' },
-            { id: 4, name: 'Сказочный дракон', description: 'Детализированная фигурка дракона.', price: 1990, image: '🐉', imageData: '' }
+            { id: 1, name: 'Загрузка...', description: 'Загрузка...', price: 1290, image: '⏳', imageData: '' },
+            { id: 2, name: 'Загрузка...', description: 'Загрузка...', price: 890, image: '⏳', imageData: '' },
+            { id: 3, name: 'Загрузка...', description: 'Загрузка...', price: 1590, image: '⏳', imageData: '' },
+            { id: 4, name: 'Загрузка...', description: 'Загрузка...', price: 1990, image: '⏳', imageData: '' }
         ];
 
         // ========== ЗАГРУЗКА С GITHUB ==========
         async function loadFromGitHub() {
-            if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ВАШ_ТОКЕН') {
+            if (!GITHUB_TOKEN || GITHUB_TOKEN === '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') {
                 console.log('ℹ️ GitHub не настроен, локальный режим');
                 loadFromLocal();
                 return;
@@ -824,7 +824,7 @@
 
         // ========== СОХРАНЕНИЕ НА GITHUB ==========
         async function saveToGitHub() {
-            if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ВАШ_ТОКЕН') return;
+            if (!GITHUB_TOKEN || GITHUB_TOKEN === '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') return;
             
             try {
                 const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
