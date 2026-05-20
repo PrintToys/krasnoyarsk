@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Toys shop beta</title>
+    <title>Мир 3D Игрушек - Магазин</title>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,7 +17,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Liquid Glass Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -67,8 +66,8 @@
         }
 
         @keyframes fadeOut {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0.95); }
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
 
         @keyframes fadeOutRight {
@@ -91,11 +90,6 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
-        }
-
-        @keyframes liquidShine {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(5%, -3%) rotate(2deg); }
         }
 
         header {
@@ -246,7 +240,6 @@
             background: rgba(255,255,255,0.3);
         }
 
-        /* Плавающая корзина */
         .cart-float-btn {
             position: fixed;
             bottom: 30px;
@@ -376,7 +369,6 @@
             to { opacity: 1; }
         }
 
-        /* Модальные окна */
         .modal {
             display: none;
             position: fixed;
@@ -410,8 +402,6 @@
             border: 1px solid rgba(255,255,255,0.3);
             animation: fadeInScale 0.35s cubic-bezier(0.16,1,0.3,1);
         }
-
-        .modal-content.closing { animation: fadeOut 0.25s ease-in; }
 
         .admin-panel { display: none; }
         .admin-panel.active { display: block; animation: containerAppear 0.5s cubic-bezier(0.16,1,0.3,1); }
@@ -609,8 +599,8 @@
 <body>
     <div id="shopContainer" class="container">
         <header>
-            <h1>🎮 3D Toys shop</h1>
-            <p class="subtitle">Сайт проходит тестовый запуск! По проблемам пишите в поддержку</p>
+            <h1>🎮 Мир 3D Игрушек</h1>
+            <p class="subtitle">Уникальные 3D-печатные игрушки для детей и взрослых</p>
         </header>
 
         <div class="user-nav" id="userNav">
@@ -780,9 +770,12 @@
     </div>
 
     <script>
-        // ========== НАСТРОЙКА СЕРВЕРА ==========
-        const SERVER_URL = window.location.origin + '/api.php';
-        let useServer = true;
+        // ========== НАСТРОЙКА GITHUB ==========
+        // ВАЖНО: Создайте файл data.json в репозитории и получите токен (инструкция ниже)
+        const GITHUB_TOKEN = 'ВАШ_ТОКЕН'; // Вставьте свой GitHub токен
+        const GITHUB_OWNER = 'ВАШ_ЛОГИН'; // Ваш логин на GitHub
+        const GITHUB_REPO = 'ВАШ_РЕПОЗИТОРИЙ'; // Название репозитория
+        const DATA_FILE = 'data.json'; // Файл с данными
 
         // ========== ДАННЫЕ ==========
         let products = [];
@@ -800,33 +793,80 @@
             { id: 4, name: 'Сказочный дракон', description: 'Детализированная фигурка дракона.', price: 1990, image: '🐉', imageData: '' }
         ];
 
-        async function loadData() {
-            if (useServer) {
-                try {
-                    const response = await fetch(SERVER_URL + '?action=getAll');
-                    if (response.ok) {
-                        const data = await response.json();
-                        if (data.products) {
-                            products = data.products.length > 0 ? data.products : [...demoTovary];
-                            users = data.users || [];
-                            orders = data.orders || [];
-                            customStatuses = data.customStatuses || [];
-                            saveToLocal();
-                            console.log('✅ Данные загружены с сервера');
-                        } else {
-                            loadFromLocal();
-                        }
-                    } else {
-                        loadFromLocal();
-                    }
-                } catch (e) {
-                    console.log('⚠️ Сервер недоступен, локальный режим');
-                    loadFromLocal();
+        // ========== ЗАГРУЗКА С GITHUB ==========
+        async function loadFromGitHub() {
+            if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ВАШ_ТОКЕН') {
+                console.log('ℹ️ GitHub не настроен, локальный режим');
+                loadFromLocal();
+                return;
+            }
+            
+            try {
+                const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const content = JSON.parse(atob(data.content));
+                    products = content.products || [...demoTovary];
+                    users = content.users || [];
+                    orders = content.orders || [];
+                    customStatuses = content.customStatuses || [];
+                    console.log('✅ Данные загружены с GitHub');
                 }
-            } else {
+            } catch (e) {
+                console.log('⚠️ Ошибка загрузки с GitHub, локальный режим');
                 loadFromLocal();
             }
-            initApp();
+        }
+
+        // ========== СОХРАНЕНИЕ НА GITHUB ==========
+        async function saveToGitHub() {
+            if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ВАШ_ТОКЕН') return;
+            
+            try {
+                const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+                
+                // Получаем текущий SHA файла
+                let sha = '';
+                try {
+                    const getResponse = await fetch(url, {
+                        headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+                    });
+                    if (getResponse.ok) {
+                        const data = await getResponse.json();
+                        sha = data.sha;
+                    }
+                } catch (e) {}
+                
+                // Сохраняем данные
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify({
+                    products, users, orders, customStatuses
+                }))));
+                
+                const body = {
+                    message: 'Обновление данных магазина',
+                    content: content
+                };
+                if (sha) body.sha = sha;
+                
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (response.ok) {
+                    console.log('✅ Данные сохранены на GitHub');
+                }
+            } catch (e) {
+                console.log('⚠️ Ошибка сохранения на GitHub');
+            }
         }
 
         function loadFromLocal() {
@@ -835,6 +875,11 @@
             orders = JSON.parse(localStorage.getItem('orders')) || [];
             customStatuses = JSON.parse(localStorage.getItem('customStatuses')) || [];
             if (products.length === 0) products = [...demoTovary];
+        }
+
+        async function loadData() {
+            await loadFromGitHub();
+            initApp();
         }
 
         function initApp() {
@@ -853,20 +898,9 @@
             localStorage.setItem('customStatuses', JSON.stringify(customStatuses));
         }
 
-        async function saveToServer() {
-            if (!useServer) return;
-            try {
-                await fetch(SERVER_URL + '?action=saveAll', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ products, users, orders, customStatuses })
-                });
-            } catch (e) {}
-        }
-
         function saveAllData() {
             saveToLocal();
-            saveToServer();
+            saveToGitHub();
         }
 
         function getCart() { return currentUser ? (currentUser.cart || []) : guestCart; }
@@ -910,8 +944,6 @@
             saveCart(cart);
             updateCartUI();
             if (currentUser) updateOrdersBadge();
-            const ce = document.getElementById('cartFloatCount');
-            if (ce.style.display !== 'none') { ce.classList.add('bump'); setTimeout(() => ce.classList.remove('bump'), 500); }
             showNotification('✅ Товар добавлен!');
         }
 
@@ -972,7 +1004,7 @@
         function toggleCartPopup() {
             const p = document.getElementById('cartPopup'), o = document.getElementById('cartOverlay');
             if (p.classList.contains('active')) closeCartPopup();
-            else { p.classList.add('active'); p.classList.remove('closing'); o.classList.add('active'); o.classList.remove('closing'); }
+            else { p.classList.add('active'); o.classList.add('active'); }
         }
 
         function closeCartPopup() {
@@ -999,7 +1031,6 @@
             document.getElementById('orderUserInfo').innerHTML = `<p><strong>👤 ${currentUser.name}</strong> | 📞 ${currentUser.phone} | 📧 ${currentUser.email}</p>`;
             document.getElementById('orderItemsList').innerHTML = currentUser.cart.map(i => `<div class="order-item"><span>${i.image} ${i.name} x${i.quantity}</span><span>${(i.price*i.quantity).toFixed(2)} ₽</span></div>`).join('');
             document.getElementById('orderTotal').textContent = `💰 Итого: ${currentUser.cart.reduce((s,i) => s + i.price*i.quantity, 0).toFixed(2)} ₽`;
-            document.getElementById('orderTelegramContact').innerHTML = currentUser.telegram ? `<div class="contact-info">📱 Связь: <a href="https://t.me/${currentUser.telegram}" target="_blank" class="telegram-link">@${currentUser.telegram}</a></div>` : '';
             openModal('orderModal');
         }
 
@@ -1019,15 +1050,8 @@
             showNotification('✅ Заказ оформлен!');
         }
 
-        function openModal(id) {
-            const m = document.getElementById(id);
-            if (m) { m.classList.add('active'); m.classList.remove('closing'); }
-        }
-
-        function closeModal(id) {
-            const m = document.getElementById(id);
-            if (m) { m.classList.add('closing'); setTimeout(() => { m.classList.remove('active', 'closing'); }, 300); }
-        }
+        function openModal(id) { const m = document.getElementById(id); if (m) { m.classList.add('active'); m.classList.remove('closing'); } }
+        function closeModal(id) { const m = document.getElementById(id); if (m) { m.classList.add('closing'); setTimeout(() => { m.classList.remove('active', 'closing'); }, 300); } }
 
         function showRegisterModal() { openModal('registerModal'); }
         function showLoginUserModal() { openModal('loginUserModal'); }
@@ -1113,7 +1137,7 @@
             document.getElementById('shopContainer').style.display = 'block';
             document.getElementById('mainFooter').style.display = 'block';
             document.querySelector('.cart-float-btn').style.display = 'flex';
-            renderProducts(); updateCartUI();
+            loadData();
             showNotification('👋 Вы вышли');
         }
 
