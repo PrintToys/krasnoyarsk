@@ -799,7 +799,7 @@
             }
             
             try {
-                const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+                const url = `https://github.com/PrintToys/krasnoyarsk/blob/main/data.json`;
                 const response = await fetch(url, {
                     headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
                 });
@@ -824,7 +824,7 @@
             if (!GITHUB_TOKEN || GITHUB_TOKEN === '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') return;
             
             try {
-                const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+                const url = `https://github.com/PrintToys/krasnoyarsk/blob/main/data.json`;
                 
                 // Получаем текущий SHA файла
                 let sha = '';
